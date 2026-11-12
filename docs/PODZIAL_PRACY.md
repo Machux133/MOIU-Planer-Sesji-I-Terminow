@@ -9,12 +9,12 @@ Terminy według harmonogramu prowadzącej (K1 17.11, L5 18.11, L6 25.11, K2 02.1
 
 | Termin | Zadanie | Gdzie w kodzie | Status |
 |---|---|---|---|
-| do 17.11 (K1) | Mapa ekranów i uzasadnienie modelu nawigacji, makiety low-fi listy i ekranu na wąskim ekranie | PDF K1 | [ ] |
+| do 17.11 (K1) | Mapa ekranów i uzasadnienie modelu nawigacji, makiety low-fi listy i ekranu na wąskim ekranie | PDF K1 (`docs/k1/osoba-a.html`, `docs/k1/K1-osoba-A.pdf`) | [x] |
 | 18.11 (L5) | Dopracować `Layout`, `Nav` i tokeny CSS (kolory, fonty), sprawdzić spójność na 4 ekranach | `Layout.astro`, `Nav.astro`, `global.css` | [ ] |
-| 25.11 (L6) | Ekran startowy: najbliższy termin jako element dominujący (większa karta, liczba dni do terminu) i wyraźny przycisk „Dodaj termin” | `index.astro` | [ ] |
-| 25.11 (L6) | Lista: grupowanie lub filtr po przedmiocie, znacznik typu z ikoną i tekstem, wyróżnienie terminów pilnych | `terminy.astro`, nowy `TerminCard.astro` i `TypBadge.astro` | [ ] |
-| 02.12 (L7) | Wybór dwupanelowy na szerokim ekranie (lista + szczegóły obok), na wąskim przejście na osobny ekran | `terminy.astro`, `termin.astro` | [ ] |
-| 02.12 (L7) | Czytelny ekran szczegółów (układ, data i dni do terminu, puste pola jako „brak”) | `termin.astro` | [ ] |
+| 25.11 (L6) | Ekran startowy: najbliższy termin jako element dominujący (większa karta, liczba dni do terminu) i wyraźny przycisk „Dodaj termin” | `index.astro`, `NajblizszyTermin.tsx`, `NumberTicker.tsx` | [x] |
+| 25.11 (L6) | Lista: grupowanie lub filtr po przedmiocie, znacznik typu z ikoną i tekstem, wyróżnienie terminów pilnych | `terminy.astro`, `ListaTerminow.tsx`, `TerminCard.tsx`, `TypBadge.tsx`, `SpotlightCard.tsx` | [x] |
+| 02.12 (L7) | Wybór dwupanelowy na szerokim ekranie (lista + szczegóły obok), na wąskim przejście na osobny ekran | `terminy.astro`, `termin.astro`, `ListaTerminow.tsx` | [x] |
+| 02.12 (L7) | Czytelny ekran szczegółów (układ, data i dni do terminu, puste pola jako „brak”) | `termin.astro`, `SzczegolyTerminu.tsx` | [x] |
 | 09.12 (L8) | Wąski ekran: układ w jednej kolumnie, cele dotyku, test w narzędziach deweloperskich telefonu | CSS | [ ] |
 | 09.12 (L8) | Kontrast 4,5:1 (DevTools) i sprawdzenie, że kolor nie jest jedynym nośnikiem informacji | CSS, komponenty | [ ] |
 

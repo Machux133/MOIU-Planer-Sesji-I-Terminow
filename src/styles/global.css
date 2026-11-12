@@ -8,6 +8,12 @@
   --kolor-akcent-tekst: #ffffff;
   --kolor-obramowanie: #c9cfdd;
   --kolor-blad: #b00020;
+  --kolor-pilny: #b3261e;      /* 6,5:1 na białym */
+  --kolor-pilny-tlo: #fdecea;
+  --kolor-wiazka: #7b5cff;
+  --typ-egzamin: #f3e8fd;
+  --typ-kolokwium: #e6f0ff;
+  --typ-projekt: #e7f6ec;
 
   --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --odstep: 1rem;
@@ -103,4 +109,118 @@ a { color: var(--kolor-akcent); }
 
 .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
 .karta { background: var(--kolor-powierzchnia); border: 1px solid var(--kolor-obramowanie); border-radius: var(--promien); padding: var(--odstep); }
-.znacznik { font-weight: 600; } /* typ terminu: ikona + tekst, nie sam kolor (praktyka 10) */
+.tresc--szeroka { max-width: 72rem; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.nadtytul { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--kolor-tekst-slaby); margin: 1.5rem 0 0.5rem; }
+.przycisk { gap: 0.5rem; }
+.przycisk--szeroki { width: 100%; min-height: 3.5rem; margin-top: var(--odstep); font-size: 1.05rem; }
+@media (min-width: 48rem) { .przycisk--szeroki { width: auto; } }
+
+/* ---- Znacznik typu: ikona + tekst, tło jako dodatek (praktyka 10) ---- */
+.znacznik {
+  display: inline-flex; align-items: center; gap: 0.35rem; width: fit-content;
+  padding: 0.15rem 0.6rem; border-radius: 999px; border: 1px solid var(--kolor-obramowanie);
+  font-size: 0.875rem; font-weight: 600; color: var(--kolor-tekst);
+}
+.znacznik--egzamin { background: var(--typ-egzamin); }
+.znacznik--kolokwium { background: var(--typ-kolokwium); }
+.znacznik--projekt { background: var(--typ-projekt); }
+
+/* ---- Karta terminu na liście ---- */
+.karta-terminu { position: relative; display: grid; gap: 0.5rem; }
+.karta-terminu__gora, .karta-terminu__dol { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.karta-terminu__dol { justify-content: flex-start; color: var(--kolor-tekst-slaby); }
+.karta-terminu__link { font-weight: 700; font-size: 1.05rem; color: var(--kolor-tekst); text-decoration: none; }
+.karta-terminu__link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* cała karta klikalna */
+.karta-terminu__link:focus-visible { outline: none; }
+.karta-terminu:has(.karta-terminu__link:focus-visible) { outline: 3px solid var(--kolor-akcent); outline-offset: 2px; }
+.karta-terminu__dni { color: var(--kolor-tekst-slaby); font-size: 0.9rem; }
+.karta-terminu:hover { border-color: var(--kolor-akcent); }
+
+/* Pilny: gruby pasek z lewej + ikona + tekst, nie tylko kolor */
+.karta--pilna { border-left: 6px solid var(--kolor-pilny); }
+.pilne {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.1rem 0.55rem; border-radius: 999px;
+  background: var(--kolor-pilny-tlo); color: var(--kolor-pilny); font-weight: 700; font-size: 0.875rem;
+}
+.karta--wybrana { border: 2px solid var(--kolor-akcent); box-shadow: 0 0 0 3px rgb(47 63 208 / 0.12); }
+
+/* React Bits „Spotlight Card”: poświata pod kursorem */
+.spotlight { overflow: hidden; }
+.spotlight::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgb(47 63 208 / 0.12), transparent 70%);
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* ---- Start: karta dominująca ---- */
+.karta--dominujaca {
+  position: relative; display: grid; gap: 0.4rem; padding: 1.5rem;
+  color: var(--kolor-tekst); text-decoration: none; border: 2px solid var(--kolor-tekst); border-radius: 1rem;
+  box-shadow: 0 8px 24px rgb(27 31 42 / 0.08);
+}
+.karta--dominujaca:hover .dominujaca__wiecej { text-decoration: underline; }
+.dominujaca__przedmiot { font-size: 1.4rem; font-weight: 700; line-height: 1.25; }
+.dominujaca__kiedy { color: var(--kolor-tekst-slaby); }
+.dominujaca__licznik { display: flex; align-items: baseline; gap: 0.6rem; margin-top: 0.5rem; font-size: 1.15rem; font-weight: 600; }
+.dominujaca__liczba { font-size: 4rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; color: var(--kolor-akcent); }
+.dominujaca__wiecej { color: var(--kolor-akcent); font-weight: 600; }
+
+/* Magic UI „Border Beam”: świetlny punkt obiegający ramkę karty */
+@property --kat { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.border-beam::after {
+  content: ''; position: absolute; inset: -2px; padding: 2px; border-radius: inherit; pointer-events: none;
+  background: conic-gradient(from var(--kat), transparent 0 70%, var(--kolor-wiazka) 85%, var(--kolor-akcent) 95%, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: obieg 5s linear infinite;
+}
+@keyframes obieg { to { --kat: 360deg; } }
+
+/* ---- Lista: filtr i dwa panele ---- */
+.filtr { margin-bottom: 0.75rem; }
+.filtr--pigulki { display: none; flex-wrap: wrap; gap: 0.5rem; }
+.pigulka {
+  min-height: 2.75rem; padding: 0 1rem; border-radius: 999px; cursor: pointer;
+  font: inherit; font-weight: 600; background: var(--kolor-powierzchnia); color: var(--kolor-tekst);
+  border: 1px solid var(--kolor-obramowanie);
+}
+.pigulka[aria-pressed='true'] { background: var(--kolor-akcent); color: var(--kolor-akcent-tekst); border-color: var(--kolor-akcent); }
+.filtr--lista { display: grid; gap: 0.25rem; font-weight: 600; }
+.filtr--lista select {
+  min-height: var(--cel-dotyku); padding: 0 0.75rem; font: inherit;
+  border: 1px solid var(--kolor-tekst-slaby); border-radius: var(--promien); background: var(--kolor-powierzchnia);
+}
+.licznik-wynikow { margin: 0 0 0.75rem; color: var(--kolor-tekst-slaby); font-size: 0.9rem; }
+.panel-szczegolow { display: none; }
+
+@media (min-width: 48rem) {
+  .filtr--pigulki { display: flex; }
+  .filtr--lista { display: none; }
+  .dwa-panele { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--odstep); align-items: start; }
+  .panel-szczegolow { display: block; position: sticky; top: var(--odstep); padding: 1.5rem; }
+}
+
+/* ---- Szczegóły ---- */
+.szczegoly { display: grid; gap: 0.75rem; }
+.szczegoly__tytul { margin: 0; }
+.szczegoly__kiedy {
+  display: grid; gap: 0.15rem; margin: 0.25rem 0; padding: 0.75rem 1rem;
+  background: var(--kolor-tlo); border-radius: var(--promien); border-left: 4px solid var(--kolor-akcent);
+}
+.szczegoly__kiedy strong { font-size: 1.2rem; }
+.szczegoly__kiedy--pilny { border-left-color: var(--kolor-pilny); }
+.szczegoly__dane { display: grid; gap: 0.75rem; margin: 0; }
+.szczegoly__dane dt { font-size: 0.85rem; font-weight: 600; color: var(--kolor-tekst-slaby); }
+.szczegoly__dane dd { margin: 0; }
+.szczegoly__dane .brak { color: var(--kolor-tekst-slaby); font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam::after { animation: none; }
+  .spotlight::before { transition: none; }
+}

@@ -9,7 +9,9 @@ Temat nr 8: **Planer sesji i terminów**.
 
 ## Technologia
 
-Astro (statyczna strona), TypeScript, czysty CSS. Bez serwera: dane startowe w
+Astro (statyczna strona), TypeScript, czysty CSS. Ekrany Start, Terminy i Szczegóły to wyspy React
+(`@astrojs/react`) z efektami wzorowanymi na Magic UI i React Bits (`motion`), ikony z `lucide-react`.
+Bez serwera: dane startowe w
 `src/data/terminy.json`, a terminy dodawane przez użytkownika trafiają do `localStorage`.
 
 ## Uruchomienie lokalne
@@ -39,8 +41,11 @@ src/lib/store.ts           odczyt i zapis (JSON + localStorage)
 src/lib/validate.ts        reguły walidacji formularza
 src/lib/url.ts             linki z uwzględnieniem base
 src/layouts/Layout.astro   ramy graficzne, nawigacja, skip-link
-src/components/            Nav, Breadcrumbs
+src/components/            Nav, Breadcrumbs (Astro); TerminCard, TypBadge, ListaTerminow,
+                           NajblizszyTermin, SzczegolyTerminu, NumberTicker, SpotlightCard (React)
+src/lib/format.ts          daty, „za N dni”, próg pilności (PILNY_DNI = 7)
 src/pages/                 index, terminy, termin (?id=), dodaj
 src/styles/global.css      zmienne CSS (kolory, fonty, odstępy)
 docs/                      dokumentacja PDF
+docs/k1/                   materiały K1 (HTML → PDF: Ctrl+P w przeglądarce albo Edge --headless --print-to-pdf)
 ```

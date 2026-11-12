@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SzczegolyZAdresu } from '../components/SzczegolyTerminu';
 import { url } from '../lib/url';
 ---
 <Layout tytul="Szczegóły terminu">
@@ -9,32 +10,8 @@ import { url } from '../lib/url';
     { etykieta: 'Terminy', href: url('/terminy') },
     { etykieta: 'Szczegóły' },
   ]} />
-  <h1 id="tytul">Szczegóły terminu</h1>
-  <dl id="szczegoly"></dl>
-  <p>
-    <a class="przycisk" href={url('/terminy')}>Wróć do listy</a>
-  </p>
-  <!-- TODO (L6): przyciski „Edytuj termin” i „Usuń termin” (z potwierdzeniem lub cofnięciem, praktyka 7) -->
+  <p><a href={url('/terminy')}>‹ Wróć do listy</a></p>
+  <SzczegolyZAdresu client:only="react">
+    <p slot="fallback">Ładowanie…</p>
+  </SzczegolyZAdresu>
 </Layout>
-
-<script>
-  import { getById } from '../lib/store';
-  const id = new URLSearchParams(location.search).get('id') ?? '';
-  const t = getById(id);
-  const tytul = document.getElementById('tytul')!;
-  const dl = document.getElementById('szczegoly')!;
-  if (!t) {
-    tytul.textContent = 'Nie znaleziono terminu';
-  } else {
-    tytul.textContent = t.przedmiot;
-    const wiersze: [string, string][] = [
-      ['Typ', t.typ], ['Data', t.data], ['Godzina', t.godzina],
-      ['Sala', t.sala || 'brak'], ['Zakres materiału', t.zakres || 'brak'], ['Notatki', t.notatki || 'brak'],
-    ];
-    for (const [k, v] of wiersze) {
-      const dt = document.createElement('dt'); dt.textContent = k; dt.style.fontWeight = '600';
-      const dd = document.createElement('dd'); dd.textContent = v;
-      dl.append(dt, dd);
-    }
-  }
-</script>

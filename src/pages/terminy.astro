@@ -1,29 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ListaTerminow from '../components/ListaTerminow';
 import { url } from '../lib/url';
 ---
-<Layout tytul="Terminy">
+<Layout tytul="Terminy" szeroki>
   <Breadcrumbs sciezka={[{ etykieta: 'Start', href: url('/') }, { etykieta: 'Terminy' }]} />
   <h1>Terminy</h1>
-  <ul class="lista" id="lista" data-szczegoly={url('/termin')}></ul>
-  <!-- TODO (L6): grupowanie/filtr po przedmiocie; na szerokim ekranie panel szczegółów obok listy (praktyka 4) -->
+  <ListaTerminow client:only="react">
+    <p slot="fallback">Ładowanie…</p>
+  </ListaTerminow>
 </Layout>
-
-<script>
-  import { getAll } from '../lib/store';
-  const ul = document.getElementById('lista')!;
-  const baza = ul.dataset.szczegoly!;
-  for (const t of getAll()) {
-    const li = document.createElement('li');
-    li.className = 'karta';
-    const a = document.createElement('a');
-    a.href = `${baza}?id=${encodeURIComponent(t.id)}`;
-    a.textContent = `${t.data} ${t.godzina}: ${t.przedmiot}`;
-    const typ = document.createElement('span');
-    typ.className = 'znacznik';
-    typ.textContent = ` (${t.typ})`;
-    li.append(a, typ);
-    ul.append(li);
-  }
-</script>

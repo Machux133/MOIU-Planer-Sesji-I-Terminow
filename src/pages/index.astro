@@ -1,25 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { url } from '../lib/url';
+import NajblizszyTermin from '../components/NajblizszyTermin';
 ---
 <Layout tytul="Start">
   <h1>Planer sesji i terminów</h1>
-  <section aria-labelledby="najblizszy">
-    <h2 id="najblizszy">Najbliższy termin</h2>
-    <div class="karta" id="najblizszy-termin">Ładowanie…</div>
-    <!-- TODO (L5/L6): wyróżnić najbliższy termin jako element dominujący (praktyka 2) -->
-  </section>
-  <p><a class="przycisk przycisk--glowny" href={url('/dodaj')}>Dodaj termin</a></p>
+  <!-- Dane są w localStorage, więc wyspa renderuje się tylko w przeglądarce. -->
+  <NajblizszyTermin client:only="react">
+    <p slot="fallback" class="karta">Ładowanie…</p>
+  </NajblizszyTermin>
 </Layout>
-
-<script>
-  import { getAll, daysUntil } from '../lib/store';
-  const dzis = new Date().toISOString().slice(0, 10);
-  const najblizszy = getAll().find((t) => t.data >= dzis);
-  const el = document.getElementById('najblizszy-termin');
-  if (el) {
-    el.textContent = najblizszy
-      ? `${najblizszy.przedmiot}, ${najblizszy.typ}, ${najblizszy.data} ${najblizszy.godzina} (za ${daysUntil(najblizszy.data)} dni)`
-      : 'Brak nadchodzących terminów.';
-  }
-</script>

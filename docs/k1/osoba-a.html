@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>K1 · Osoba A · Planer sesji</title>
+<style>
+  /* Ten sam zestaw tokenów co src/styles/global.css, żeby dokument wyglądał jak aplikacja. */
+  :root {
+    --tlo: #f6f7fb; --pow: #fff; --tekst: #1b1f2a; --slaby: #4a5163;
+    --akcent: #2f3fd0; --obr: #c9cfdd;
+    --lofi-linia: #555; --lofi-wypelnienie: #eee; --lofi-pasek: #c8c8c8;
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 1rem/1.55 var(--font); color: var(--tekst); background: var(--tlo); }
+  main { max-width: 60rem; margin: 0 auto; padding: 1rem; }
+  h1 { font-size: 1.9rem; margin: 1.5rem 0 .25rem; }
+  h2 { font-size: 1.35rem; margin: 2.25rem 0 .5rem; border-bottom: 2px solid var(--obr); padding-bottom: .25rem; }
+  h3 { font-size: 1.05rem; margin: 1.5rem 0 .4rem; }
+  .meta { color: var(--slaby); margin: 0 0 1rem; }
+  table { border-collapse: collapse; width: 100%; background: var(--pow); font-size: .95rem; }
+  th, td { border: 1px solid var(--obr); padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #eceef6; }
+  figure { margin: 1rem 0; background: var(--pow); border: 1px solid var(--obr); border-radius: .5rem; padding: .75rem; }
+  figcaption { color: var(--slaby); font-size: .9rem; margin-top: .5rem; }
+  figure svg { display: block; width: 100%; height: auto; }
+  .telefony { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  @media (max-width: 40rem) { .telefony { grid-template-columns: 1fr; } .telefony svg { max-width: 20rem; margin: 0 auto; } }
+  ol.adnotacje { padding-left: 1.4rem; font-size: .95rem; }
+  .uwaga { background: #eef0fd; border-left: 4px solid var(--akcent); padding: .6rem .8rem; border-radius: .25rem; }
+
+  /* Magic UI „Dot Pattern”: tło z kropek pod mapą ekranów, czysty CSS. */
+  .kropki {
+    background-color: var(--pow);
+    background-image: radial-gradient(circle, #cfd4e3 1.2px, transparent 1.3px);
+    background-size: 18px 18px;
+  }
+
+  /* Magic UI „Animated Beam”: tor (szara linia ze strzałką) + świecąca wiązka biegnąca po nim. */
+  .tor { fill: none; stroke: #b9bfd0; stroke-width: 2; }
+  .wiazka {
+    fill: none; stroke: url(#gradient-wiazki); stroke-width: 3.5; stroke-linecap: round;
+    stroke-dasharray: 16 84; animation: bieg 2.6s linear infinite; filter: url(#poswiata);
+  }
+  .wiazka:nth-of-type(2n) { animation-delay: -1.3s; }
+  @keyframes bieg { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+  .ekran rect { fill: var(--pow); stroke: var(--tekst); stroke-width: 2; }
+  .ekran .nazwa { font: 700 17px var(--font); }
+  .ekran .adres { font: 13px ui-monospace, Consolas, monospace; fill: var(--slaby); }
+  .etykieta { font: 12.5px var(--font); fill: var(--slaby); paint-order: stroke; stroke: var(--pow); stroke-width: 5px; }
+  .grupa { fill: none; stroke: var(--akcent); stroke-width: 1.5; stroke-dasharray: 6 5; }
+  .grupa-tekst { font: 600 12.5px var(--font); fill: var(--akcent); }
+
+  /* Makiety low-fi: tylko odcienie szarości, bez koloru (to jeszcze nie projekt graficzny). */
+  .lofi { font-family: var(--font); }
+  .lofi .ramka { fill: #fff; stroke: var(--lofi-linia); stroke-width: 2; }
+  .lofi .pole { fill: #fff; stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .pole-mocne { fill: #fff; stroke: #222; stroke-width: 3.5; }
+  .lofi .szare { fill: var(--lofi-wypelnienie); stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .ciemne { fill: #9a9a9a; stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .pasek { fill: var(--lofi-pasek); }
+  .lofi text { fill: #333; font-size: 14px; }
+  .lofi .t-duzy { font-size: 24px; font-weight: 700; }
+  .lofi .t-sr { font-size: 16px; font-weight: 600; }
+  .lofi .t-maly { font-size: 12px; fill: #666; }
+  .lofi .t-liczba { font-size: 56px; font-weight: 800; }
+  .lofi .t-bialy { fill: #fff; font-weight: 600; }
+  .lofi .nr circle { fill: var(--akcent); }
+  .lofi .nr text { fill: #fff; font-size: 13px; font-weight: 700; text-anchor: middle; }
+
+  @media (prefers-reduced-motion: reduce) { .wiazka { animation: none; stroke-dasharray: none; opacity: .5; } }
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body { background: #fff; font-size: 10.5pt; }
+    main { max-width: none; padding: 0; }
+    .wiazka { display: none; }
+    figure, table, .uwaga { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>K1: nawigacja i makiety (osoba A)</h1>
+<p class="meta">Planer sesji i terminów · Metody opracowywania interfejsów użytkownika, sem. zimowy 2026/27 · część osoby A: mapa ekranów, model nawigacji, makiety low-fi</p>
+
+<h2>1. Mapa ekranów</h2>
+<p>Aplikacja ma cztery ekrany. Każdy ma własny adres, więc działa przycisk „Wstecz” przeglądarki, a link do konkretnego terminu można zapisać albo wysłać (<code>?id=</code>).</p>
+
+<table>
+  <thead><tr><th>Ekran</th><th>Adres</th><th>Cel</th><th>Wejście z</th></tr></thead>
+  <tbody>
+    <tr><td>Start</td><td><code>/</code></td><td>Szybka odpowiedź na pytanie „co mam najbliżej?”: najbliższy termin z liczbą dni i przycisk „Dodaj termin”</td><td>nawigacja globalna, pierwsze wejście</td></tr>
+    <tr><td>Terminy (lista)</td><td><code>/terminy</code></td><td>Wszystkie terminy według daty, filtr po przedmiocie, wyróżnienie pilnych</td><td>nawigacja globalna, Start, po zapisaniu formularza</td></tr>
+    <tr><td>Szczegóły</td><td><code>/termin?id=…</code></td><td>Pełne dane jednego terminu, przyciski „Edytuj termin” i „Usuń termin”</td><td>lista, karta najbliższego terminu na Starcie</td></tr>
+    <tr><td>Dodaj / edytuj</td><td><code>/dodaj</code>, <code>/dodaj?id=…</code></td><td>Formularz nowego terminu albo edycja istniejącego</td><td>nawigacja globalna, Start, Szczegóły (edycja)</td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <svg class="kropki" viewBox="0 0 900 460" role="img" aria-labelledby="mapa-tytul">
+    <title id="mapa-tytul">Mapa ekranów: Start prowadzi do Terminów, Szczegółów i formularza; Terminy do Szczegółów; Szczegóły do formularza edycji; formularz po zapisie wraca do Terminów.</title>
+    <defs>
+      <linearGradient id="gradient-wiazki" x1="0" x2="1">
+        <stop offset="0" stop-color="#7b5cff" /><stop offset="1" stop-color="#2f3fd0" />
+      </linearGradient>
+      <filter id="poswiata" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+      <marker id="grot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8d94aa" /></marker>
+    </defs>
+
+    <rect class="grupa" x="342" y="60" width="526" height="126" rx="16" />
+    <text class="grupa-tekst" x="476" y="205">Szeroki ekran: dwa panele obok siebie</text>
+
+    <g id="tory">
+      <path class="tor" marker-end="url(#grot)" d="M220,232 C290,232 290,122 358,122" />
+      <path class="tor" marker-end="url(#grot)" d="M130,205 C130,22 750,18 750,78" />
+      <path class="tor" marker-end="url(#grot)" d="M220,290 C320,290 400,372 508,372" />
+      <path class="tor" marker-end="url(#grot)" d="M540,122 L658,122" />
+      <path class="tor" marker-end="url(#grot)" d="M750,164 C750,280 760,372 692,372" />
+      <path class="tor" marker-end="url(#grot)" d="M560,330 C560,260 450,250 450,166" />
+    </g>
+    <g aria-hidden="true">
+      <path class="wiazka" pathLength="100" d="M220,232 C290,232 290,122 358,122" />
+      <path class="wiazka" pathLength="100" d="M130,205 C130,22 750,18 750,78" />
+      <path class="wiazka" pathLength="100" d="M220,290 C320,290 400,372 508,372" />
+      <path class="wiazka" pathLength="100" d="M540,122 L658,122" />
+      <path class="wiazka" pathLength="100" d="M750,164 C750,280 760,372 692,372" />
+      <path class="wiazka" pathLength="100" d="M560,330 C560,260 450,250 450,166" />
+    </g>
+
+    <text class="etykieta" x="232" y="168">„Zobacz wszystkie”</text>
+    <text class="etykieta" x="330" y="40">klik w kartę najbliższego terminu</text>
+    <text class="etykieta" x="262" y="350">„Dodaj termin”</text>
+    <text class="etykieta" x="556" y="112">wybór terminu</text>
+    <text class="etykieta" x="760" y="290">„Edytuj termin”</text>
+    <text class="etykieta" x="440" y="248">zapis → komunikat</text>
+
+    <g class="ekran"><rect x="40" y="205" width="180" height="84" rx="12" /><text class="nazwa" x="58" y="240">Start</text><text class="adres" x="58" y="264">/</text></g>
+    <g class="ekran"><rect x="360" y="80" width="180" height="84" rx="12" /><text class="nazwa" x="378" y="115">Terminy</text><text class="adres" x="378" y="139">/terminy</text></g>
+    <g class="ekran"><rect x="660" y="80" width="180" height="84" rx="12" /><text class="nazwa" x="678" y="115">Szczegóły</text><text class="adres" x="678" y="139">/termin?id=…</text></g>
+    <g class="ekran"><rect x="510" y="330" width="180" height="84" rx="12" /><text class="nazwa" x="528" y="365">Dodaj / edytuj</text><text class="adres" x="528" y="389">/dodaj[?id=…]</text></g>
+
+    <text class="etykieta" x="40" y="445">Z każdego ekranu: nawigacja globalna → Start · Terminy · Dodaj termin (nie rysowana, żeby nie zaciemniać mapy)</text>
+  </svg>
+  <figcaption>Rys. 1. Mapa ekranów i przejść. Strzałki to przejścia wywołane przez użytkownika, opisane etykietą przycisku albo linku. „Usuń termin” w szczegółach wraca na listę z opcją „Cofnij”.</figcaption>
+</figure>
+
+<h2>2. Model nawigacji i uzasadnienie</h2>
+<p><strong>Model: płytka hierarchia (2 poziomy) ze stałą nawigacją globalną.</strong> Poziom 1 to trzy ekrany w nawigacji globalnej: Start, Terminy i Dodaj termin. Poziom 2 to Szczegóły, do których wchodzi się z listy albo ze Startu. Każdy ekran jest osiągalny w najwyżej dwóch kliknięciach.</p>
+
+<table>
+  <thead><tr><th>Decyzja</th><th>Uzasadnienie</th></tr></thead>
+  <tbody>
+    <tr><td>Stała nawigacja z 3 pozycjami, zawsze widoczna</td><td>Przy trzech pozycjach nie ma powodu chować ich w menu „hamburger”. Widoczne opcje nie wymagają zapamiętywania, a użytkownik zawsze wie, gdzie jest (<code>aria-current</code> i wyróżnienie aktywnej pozycji).</td></tr>
+    <tr><td>Wąski ekran: dolny pasek; szeroki: boczny pasek</td><td>Na telefonie dolny pasek jest w zasięgu kciuka, a cele mają co najmniej 48 px (ok. 1 cm). Na szerokim ekranie boczny pasek nie zabiera wysokości treści. Kolejność pozycji jest w obu wariantach ta sama.</td></tr>
+    <tr><td>„Dodaj termin” jako pozycja nawigacji i główny przycisk na Starcie</td><td>To najczęstsza akcja zmieniająca dane, więc powinna być dostępna od razu, a nie tylko z listy.</td></tr>
+    <tr><td>Okruszki na ekranach poziomu 2 i w formularzu</td><td>Pokazują miejsce w hierarchii (Start › Terminy › Szczegóły) i dają drogę w górę niezależną od historii przeglądarki.</td></tr>
+    <tr><td>Lista i szczegóły: dwa panele na szerokim ekranie, osobny ekran na wąskim</td><td>Wzorzec lista–szczegóły (master–detail). Na szerokim ekranie przeglądanie kolejnych terminów nie wymaga skakania tam i z powrotem. Na wąskim ekranie dwa panele byłyby nieczytelne, więc szczegóły otwierają się jako osobny ekran z linkiem „Wróć do listy”.</td></tr>
+    <tr><td>Stan w adresie URL (<code>?id=</code>)</td><td>Działa przycisk „Wstecz”, odświeżenie strony nie gubi miejsca, a link do terminu można zapisać.</td></tr>
+    <tr><td>Po zapisie formularza przejście na listę z komunikatem</td><td>Użytkownik od razu widzi, że termin się dodał i gdzie trafił na liście.</td></tr>
+  </tbody>
+</table>
+
+<h2>3. Makiety low-fi</h2>
+<p>Makiety pokazują tylko układ i hierarchię: odcienie szarości, prostokąty zamiast tekstu pomocniczego, bez ostatecznych kolorów i ikon. Znacznik typu ma kształt i tekst (● egzamin, ▲ kolokwium, ■ projekt), więc kolor nie jest jedynym nośnikiem informacji.</p>
+
+<h3>3.1. Lista terminów na szerokim ekranie (dwa panele)</h3>
+<figure>
+  <svg class="lofi" viewBox="0 0 960 560" role="img" aria-label="Makieta listy terminów na szerokim ekranie: boczna nawigacja, filtr przedmiotu, lista kart po lewej i szczegóły wybranego terminu po prawej">
+    <rect class="ramka" x="1" y="1" width="958" height="558" rx="10" />
+    <rect class="szare" x="1" y="1" width="958" height="32" rx="10" />
+    <circle cx="20" cy="17" r="5" class="pole" /><circle cx="38" cy="17" r="5" class="pole" /><circle cx="56" cy="17" r="5" class="pole" />
+    <rect class="pole" x="90" y="8" width="420" height="18" rx="9" /><text class="t-maly" x="100" y="21">…/MOIU-Planer-Sesji-I-Terminow/terminy</text>
+
+    <rect class="szare" x="1" y="33" width="200" height="526" />
+    <text class="t-sr" x="20" y="66">Planer sesji</text>
+    <rect class="pole" x="12" y="84" width="176" height="44" rx="6" /><text x="28" y="111">Start</text>
+    <rect class="ciemne" x="12" y="136" width="176" height="44" rx="6" /><text class="t-bialy" x="28" y="163">Terminy</text>
+    <rect class="pole" x="12" y="188" width="176" height="44" rx="6" /><text x="28" y="215">Dodaj termin</text>
+
+    <text class="t-maly" x="224" y="62">Start  ›  Terminy</text>
+    <text class="t-duzy" x="224" y="98">Terminy</text>
+    <rect class="ciemne" x="224" y="116" width="92" height="34" rx="17" /><text class="t-bialy" x="240" y="138">Wszystkie</text>
+    <rect class="pole" x="324" y="116" width="150" height="34" rx="17" /><text x="340" y="138">Analiza mat.</text>
+    <rect class="pole" x="482" y="116" width="80" height="34" rx="17" /><text x="500" y="138">MOIU</text>
+    <rect class="pole" x="570" y="116" width="128" height="34" rx="17" /><text x="586" y="138">Bazy danych</text>
+
+    <!-- karta pilna: grubsza ramka + tekst „Za 3 dni” -->
+    <rect class="pole-mocne" x="224" y="168" width="340" height="74" rx="8" />
+    <rect class="ciemne" x="224" y="168" width="10" height="74" />
+    <text class="t-sr" x="248" y="195">Bazy danych</text><text class="t-maly" x="248" y="222">▲ Kolokwium · 15.11, 10:15</text>
+    <rect class="szare" x="468" y="180" width="84" height="24" rx="12" /><text class="t-maly" x="478" y="197">! Za 3 dni</text>
+
+    <rect class="pole" x="224" y="252" width="340" height="74" rx="8" />
+    <text class="t-sr" x="248" y="279">MOIU</text><text class="t-maly" x="248" y="306">▲ Kolokwium · 09.12, 12:00</text>
+    <text class="t-maly" x="490" y="279">za 27 dni</text>
+
+    <rect class="pole" x="224" y="336" width="340" height="74" rx="8" />
+    <text class="t-sr" x="248" y="363">MOIU</text><text class="t-maly" x="248" y="390">■ Projekt · 12.01, 23:59</text>
+    <text class="t-maly" x="490" y="363">za 61 dni</text>
+
+    <rect class="pole" x="224" y="420" width="340" height="74" rx="8" stroke-width="3" />
+    <rect class="szare" x="224" y="420" width="340" height="74" rx="8" opacity=".6" />
+    <text class="t-sr" x="248" y="447">Analiza matematyczna</text><text class="t-maly" x="248" y="474">● Egzamin · 26.01, 09:00</text>
+    <text class="t-maly" x="490" y="447">za 75 dni</text>
+
+    <!-- panel szczegółów -->
+    <rect class="pole" x="584" y="168" width="356" height="372" rx="8" />
+    <text class="t-duzy" x="604" y="206" style="font-size:20px">Analiza matematyczna</text>
+    <rect class="szare" x="604" y="220" width="96" height="26" rx="13" /><text class="t-maly" x="614" y="238">● Egzamin</text>
+    <text class="t-sr" x="604" y="278">26.01.2027, 09:00</text><text class="t-maly" x="604" y="298">za 75 dni</text>
+    <text class="t-maly" x="604" y="330">Sala</text><rect class="pasek" x="700" y="320" width="70" height="12" rx="6" />
+    <text class="t-maly" x="604" y="356">Zakres</text><rect class="pasek" x="700" y="346" width="210" height="12" rx="6" /><rect class="pasek" x="700" y="364" width="150" height="12" rx="6" />
+    <text class="t-maly" x="604" y="400">Notatki</text><text class="t-maly" x="700" y="400">brak</text>
+    <rect class="ciemne" x="604" y="474" width="150" height="46" rx="6" /><text class="t-bialy" x="624" y="502">Edytuj termin</text>
+    <rect class="pole" x="766" y="474" width="150" height="46" rx="6" /><text x="788" y="502">Usuń termin</text>
+
+    <g class="nr"><circle cx="196" cy="160" r="12" /><text x="196" y="165">1</text></g>
+    <g class="nr"><circle cx="712" cy="133" r="12" /><text x="712" y="138">2</text></g>
+    <g class="nr"><circle cx="572" cy="192" r="12" /><text x="572" y="197">3</text></g>
+    <g class="nr"><circle cx="572" cy="430" r="12" /><text x="572" y="435">4</text></g>
+    <g class="nr"><circle cx="928" cy="292" r="12" /><text x="928" y="297">5</text></g>
+  </svg>
+  <figcaption>Rys. 2. Lista terminów, szeroki ekran (od 768 px). Dane przykładowe; kolokwium z Baz danych przesunięte na „za 3 dni”, żeby pokazać wyróżnienie pilnego terminu.</figcaption>
+</figure>
+<ol class="adnotacje">
+  <li>Boczna nawigacja globalna, aktywna pozycja wyróżniona tłem i <code>aria-current="page"</code>.</li>
+  <li>Filtr po przedmiocie jako przyciski-pigułki, „Wszystkie” domyślnie zaznaczone.</li>
+  <li>Termin pilny (do 7 dni): grubsza ramka, pasek z lewej i tekst „! Za 3 dni”, czyli nie tylko kolor.</li>
+  <li>Wybrany termin jest zaznaczony na liście; jego dane widać w panelu obok.</li>
+  <li>Panel szczegółów: data i liczba dni na górze, puste pola jako „brak”, akcje na dole.</li>
+</ol>
+
+<h3>3.2. Wąski ekran (telefon, 360 px)</h3>
+<div class="telefony">
+  <figure>
+    <svg class="lofi" viewBox="0 0 360 720" role="img" aria-label="Makieta ekranu startowego na telefonie: duża karta najbliższego terminu z liczbą dni i przycisk Dodaj termin">
+      <rect class="ramka" x="2" y="2" width="356" height="716" rx="28" />
+      <rect class="pasek" x="140" y="16" width="80" height="8" rx="4" />
+      <text class="t-duzy" x="22" y="74">Planer sesji</text>
+      <text class="t-maly" x="22" y="112">NAJBLIŻSZY TERMIN</text>
+      <rect class="pole-mocne" x="20" y="124" width="320" height="230" rx="14" />
+      <rect class="szare" x="40" y="144" width="112" height="28" rx="14" /><text class="t-maly" x="52" y="163">▲ Kolokwium</text>
+      <text class="t-sr" x="40" y="204">Fizyka</text>
+      <text class="t-maly" x="40" y="226">03.12.2026, 16:00</text>
+      <text class="t-liczba" x="40" y="306">21</text><text class="t-sr" x="124" y="300">dni do terminu</text>
+      <text class="t-maly" x="40" y="336">Zobacz szczegóły ›</text>
+      <rect class="ciemne" x="20" y="374" width="320" height="56" rx="10" /><text class="t-bialy" x="118" y="408">+ Dodaj termin</text>
+      <text class="t-maly" x="22" y="466">NASTĘPNE</text>
+      <rect class="pole" x="20" y="478" width="320" height="52" rx="8" /><rect class="pasek" x="36" y="494" width="180" height="10" rx="5" /><rect class="pasek" x="36" y="510" width="110" height="8" rx="4" />
+      <rect class="pole" x="20" y="540" width="320" height="52" rx="8" /><rect class="pasek" x="36" y="556" width="160" height="10" rx="5" /><rect class="pasek" x="36" y="572" width="120" height="8" rx="4" />
+      <text class="t-maly" x="22" y="620">Zobacz wszystkie terminy ›</text>
+      <rect class="szare" x="2" y="652" width="356" height="66" rx="0" />
+      <rect class="ciemne" x="8" y="658" width="108" height="52" rx="8" /><text class="t-bialy" x="42" y="690">Start</text>
+      <text x="152" y="690">Terminy</text><text x="262" y="690">Dodaj</text>
+      <g class="nr"><circle cx="336" cy="128" r="12" /><text x="336" y="133">1</text></g>
+      <g class="nr"><circle cx="336" cy="380" r="12" /><text x="336" y="385">2</text></g>
+      <g class="nr"><circle cx="336" cy="656" r="12" /><text x="336" y="661">3</text></g>
+    </svg>
+    <figcaption>Rys. 3. Start.</figcaption>
+  </figure>
+  <figure>
+    <svg class="lofi" viewBox="0 0 360 720" role="img" aria-label="Makieta listy terminów na telefonie: lista wyboru przedmiotu i karty w jednej kolumnie">
+      <rect class="ramka" x="2" y="2" width="356" height="716" rx="28" />
+      <rect class="pasek" x="140" y="16" width="80" height="8" rx="4" />
+      <text class="t-maly" x="22" y="58">Start  ›  Terminy</text>
+      <text class="t-duzy" x="22" y="94">Terminy</text>
+      <text class="t-maly" x="22" y="126">Przedmiot</text>
+      <rect class="pole" x="20" y="134" width="320" height="48" rx="8" /><text x="36" y="164">Wszystkie</text><text x="312" y="164">▾</text>
+      <rect class="pole-mocne" x="20" y="198" width="320" height="84" rx="10" /><rect class="ciemne" x="20" y="198" width="10" height="84" />
+      <text class="t-sr" x="44" y="228">Bazy danych</text><text class="t-maly" x="44" y="252">▲ Kolokwium · 15.11, 10:15</text>
+      <rect class="szare" x="244" y="210" width="84" height="24" rx="12" /><text class="t-maly" x="254" y="227">! Za 3 dni</text>
+      <rect class="pole" x="20" y="292" width="320" height="84" rx="10" />
+      <text class="t-sr" x="44" y="322">MOIU</text><text class="t-maly" x="44" y="346">▲ Kolokwium · 09.12, 12:00</text><text class="t-maly" x="268" y="322">za 27 dni</text>
+      <rect class="pole" x="20" y="386" width="320" height="84" rx="10" />
+      <text class="t-sr" x="44" y="416">MOIU</text><text class="t-maly" x="44" y="440">■ Projekt · 12.01, 23:59</text><text class="t-maly" x="268" y="416">za 61 dni</text>
+      <rect class="pole" x="20" y="480" width="320" height="84" rx="10" />
+      <text class="t-sr" x="44" y="510">Analiza matematyczna</text><text class="t-maly" x="44" y="534">● Egzamin · 26.01, 09:00</text>
+      <rect class="pole" x="20" y="574" width="320" height="64" rx="10" /><rect class="pasek" x="44" y="596" width="170" height="10" rx="5" />
+      <rect class="szare" x="2" y="652" width="356" height="66" />
+      <text x="42" y="690">Start</text>
+      <rect class="ciemne" x="126" y="658" width="108" height="52" rx="8" /><text class="t-bialy" x="152" y="690">Terminy</text>
+      <text x="262" y="690">Dodaj</text>
+      <g class="nr"><circle cx="336" cy="138" r="12" /><text x="336" y="143">4</text></g>
+      <g class="nr"><circle cx="336" cy="200" r="12" /><text x="336" y="205">5</text></g>
+    </svg>
+    <figcaption>Rys. 4. Lista.</figcaption>
+  </figure>
+  <figure>
+    <svg class="lofi" viewBox="0 0 360 720" role="img" aria-label="Makieta szczegółów terminu na telefonie: osobny ekran z powrotem do listy i przyciskami na całą szerokość">
+      <rect class="ramka" x="2" y="2" width="356" height="716" rx="28" />
+      <rect class="pasek" x="140" y="16" width="80" height="8" rx="4" />
+      <text class="t-maly" x="22" y="58">Start  ›  Terminy  ›  Szczegóły</text>
+      <text x="22" y="90">‹ Wróć do listy</text>
+      <text class="t-duzy" x="22" y="134">MOIU</text>
+      <rect class="szare" x="22" y="148" width="112" height="28" rx="14" /><text class="t-maly" x="34" y="167">▲ Kolokwium</text>
+      <rect class="pole" x="20" y="192" width="320" height="84" rx="10" />
+      <text class="t-sr" x="40" y="226">09.12.2026, 12:00</text><text x="40" y="254">za 27 dni</text>
+      <text class="t-maly" x="22" y="312">Sala</text><text x="22" y="334">B-204</text>
+      <text class="t-maly" x="22" y="368">Zakres materiału</text><rect class="pasek" x="22" y="380" width="200" height="12" rx="6" />
+      <text class="t-maly" x="22" y="424">Notatki</text><text x="22" y="446">brak</text>
+      <text class="t-maly" x="22" y="480">Przypomnienie</text><text x="22" y="502">1 dzień przed</text>
+      <rect class="ciemne" x="20" y="530" width="320" height="52" rx="10" /><text class="t-bialy" x="124" y="562">Edytuj termin</text>
+      <rect class="pole" x="20" y="592" width="320" height="52" rx="10" /><text x="128" y="624">Usuń termin</text>
+      <rect class="szare" x="2" y="652" width="356" height="66" />
+      <text x="42" y="690">Start</text>
+      <rect class="ciemne" x="126" y="658" width="108" height="52" rx="8" /><text class="t-bialy" x="152" y="690">Terminy</text>
+      <text x="262" y="690">Dodaj</text>
+      <g class="nr"><circle cx="336" cy="84" r="12" /><text x="336" y="89">6</text></g>
+      <g class="nr"><circle cx="336" cy="446" r="12" /><text x="336" y="451">7</text></g>
+      <g class="nr"><circle cx="336" cy="556" r="12" /><text x="336" y="561">8</text></g>
+    </svg>
+    <figcaption>Rys. 5. Szczegóły.</figcaption>
+  </figure>
+</div>
+<ol class="adnotacje">
+  <li>Najbliższy termin jako element dominujący: największa karta na ekranie, liczba dni wielką cyfrą, cała karta prowadzi do szczegółów.</li>
+  <li>Główna akcja „Dodaj termin” na całą szerokość, wysokość 56 px.</li>
+  <li>Dolny pasek nawigacji: trzy cele po ok. 1/3 szerokości i 52 px wysokości, w zasięgu kciuka.</li>
+  <li>Na wąskim ekranie filtr to natywna lista wyboru zamiast pigułek: zajmuje jedną linię i otwiera systemowy wybierak.</li>
+  <li>Jedna kolumna; pilny termin wyróżniony tak samo jak na szerokim ekranie (ramka, pasek, tekst).</li>
+  <li>Szczegóły to osobny ekran: okruszki plus wyraźny link „Wróć do listy”.</li>
+  <li>Puste pole pokazane jako „brak”, a nie pominięte; układ etykieta nad wartością mieści się w 360 px.</li>
+  <li>Przyciski akcji na całą szerokość, „Usuń” słabiej wyróżniony niż „Edytuj”, żeby nie kliknąć go przypadkiem.</li>
+</ol>
+
+<h2>4. Efekty wizualne (inspiracje: Magic UI, React Bits)</h2>
+<p>Wybraliśmy cztery efekty i każdy tylko wzmacnia to, co już jest w interfejsie, nie niesie informacji sam w sobie:</p>
+<table>
+  <thead><tr><th>Efekt</th><th>Gdzie</th><th>Po co</th></tr></thead>
+  <tbody>
+    <tr><td>Animated Beam (Magic UI)</td><td>Rys. 1 w tym dokumencie</td><td>Pokazuje kierunek przejść między ekranami.</td></tr>
+    <tr><td>Number Ticker (Magic UI)</td><td>Liczba dni na karcie najbliższego terminu (Start, L6)</td><td>Licznik „dobiega” do wartości przy wejściu i przyciąga wzrok do elementu dominującego.</td></tr>
+    <tr><td>Spotlight Card (React Bits)</td><td>Karty na liście (L6)</td><td>Delikatne podświetlenie pod kursorem pokazuje, że karta jest klikalna.</td></tr>
+    <tr><td>Border Beam (Magic UI)</td><td>Ramka karty najbliższego terminu (Start)</td><td>Punkt światła obiega ramkę i dodatkowo wyróżnia element dominujący.</td></tr>
+  </tbody>
+</table>
+<p class="uwaga">Ekrany Start, Terminy i Szczegóły są zbudowane jako wyspy React w Astro (<code>@astrojs/react</code>, <code>client:only</code>, bo dane są w <code>localStorage</code>). Number Ticker korzysta z biblioteki <code>motion</code> tak jak oryginał z Magic UI. Spotlight Card i Border Beam to krótkie warianty w CSS, bez Tailwinda, żeby nie dublować tokenów z <code>global.css</code>. Ikony typów pochodzą z <code>lucide-react</code> (licencja ISC). Animacje wyłączają się przy <code>prefers-reduced-motion: reduce</code>. Licznik ma <code>aria-hidden</code>, a czytnik ekranu dostaje gotową liczbę dni z ukrytego tekstu, więc nie odczytuje kolejnych klatek.</p>
+
+</main>
+</body>
+</html>

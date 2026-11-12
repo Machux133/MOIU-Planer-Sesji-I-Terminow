@@ -2,8 +2,8 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 
-interface Props { tytul: string }
-const { tytul } = Astro.props;
+interface Props { tytul: string; szeroki?: boolean }
+const { tytul, szeroki = false } = Astro.props;
 ---
 <!doctype html>
 <html lang="pl">
@@ -16,7 +16,7 @@ const { tytul } = Astro.props;
     <a class="skip-link" href="#tresc">Przejdź do treści</a>
     <div class="app">
       <Nav />
-      <main class="tresc" id="tresc">
+      <main class:list={["tresc", { "tresc--szeroka": szeroki }]} id="tresc">
         <slot />
       </main>
     </div>
