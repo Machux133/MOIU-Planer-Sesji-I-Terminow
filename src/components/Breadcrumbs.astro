@@ -1,0 +1,16 @@
+---
+// Okruszki (praktyka 3): użytkownik wie, gdzie jest, i ma drogę powrotu.
+interface Props { sciezka: { etykieta: string; href?: string }[] }
+const { sciezka } = Astro.props;
+---
+<nav class="okruszki" aria-label="Okruszki">
+  <ol>
+    {sciezka.map((e, i) => (
+      <li>
+        {e.href && i < sciezka.length - 1
+          ? <a href={e.href}>{e.etykieta}</a>
+          : <span aria-current={i === sciezka.length - 1 ? 'page' : undefined}>{e.etykieta}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,0 +1,24 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+
+interface Props { tytul: string }
+const { tytul } = Astro.props;
+---
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tytul} · Planer sesji</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#tresc">Przejdź do treści</a>
+    <div class="app">
+      <Nav />
+      <main class="tresc" id="tresc">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

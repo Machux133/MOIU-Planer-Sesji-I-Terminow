@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { url } from '../lib/url';
+---
+<Layout tytul="Dodaj termin">
+  <Breadcrumbs sciezka={[
+    { etykieta: 'Start', href: url('/') },
+    { etykieta: 'Terminy', href: url('/terminy') },
+    { etykieta: 'Dodaj termin' },
+  ]} />
+  <h1>Dodaj termin</h1>
+  <form id="formularz" novalidate>
+    <!-- TODO (L6): pola z etykietami: przedmiot, typ, data, godzina, sala, zakres, przypomnienie;
+         walidacja z validate.ts; komunikaty przy polach (aria-describedby); tryb edycji przez ?id= -->
+    <p>Formularz w budowie.</p>
+    <button class="przycisk przycisk--glowny" type="submit">Dodaj termin</button>
+  </form>
+</Layout>

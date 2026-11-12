@@ -1,0 +1,106 @@
+/* Ramy graficzne (praktyka 1): wszystkie kolory, kroje i odstępy w jednym miejscu. */
+:root {
+  --kolor-tlo: #f6f7fb;
+  --kolor-powierzchnia: #ffffff;
+  --kolor-tekst: #1b1f2a;
+  --kolor-tekst-slaby: #4a5163;
+  --kolor-akcent: #2f3fd0;
+  --kolor-akcent-tekst: #ffffff;
+  --kolor-obramowanie: #c9cfdd;
+  --kolor-blad: #b00020;
+
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --odstep: 1rem;
+  --promien: 0.5rem;
+  --cel-dotyku: 3rem; /* ok. 1 cm (praktyka 9) */
+  --szerokosc-nav: 14rem;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--kolor-tekst);
+  background: var(--kolor-tlo);
+}
+
+h1 { font-size: 1.75rem; margin: 0 0 var(--odstep); }
+h2 { font-size: 1.25rem; }
+
+a { color: var(--kolor-akcent); }
+
+/* Widoczne zaznaczenie przy obsłudze klawiaturą (praktyka 8) */
+:focus-visible {
+  outline: 3px solid var(--kolor-akcent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--kolor-akcent);
+  color: var(--kolor-akcent-tekst);
+  border-radius: var(--promien);
+  z-index: 10;
+}
+.skip-link:focus { top: 0.5rem; }
+
+/* ---- Układ: wąski ekran = jedna kolumna + dolny pasek ---- */
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.tresc { flex: 1; padding: var(--odstep); padding-bottom: calc(var(--cel-dotyku) + 2rem); max-width: 60rem; width: 100%; margin: 0 auto; }
+
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: var(--kolor-powierzchnia);
+  border-top: 1px solid var(--kolor-obramowanie);
+}
+.nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
+.nav li { flex: 1; }
+.nav a {
+  display: flex; align-items: center; justify-content: center;
+  min-height: var(--cel-dotyku);
+  text-decoration: none; color: var(--kolor-tekst);
+  font-weight: 600;
+}
+.nav a[aria-current='page'] {
+  background: var(--kolor-akcent); color: var(--kolor-akcent-tekst);
+}
+
+/* ---- Szeroki ekran: boczny pasek ---- */
+@media (min-width: 48rem) {
+  .app { flex-direction: row; }
+  .nav {
+    position: sticky; top: 0; align-self: flex-start;
+    height: 100vh; width: var(--szerokosc-nav);
+    border-top: 0; border-right: 1px solid var(--kolor-obramowanie);
+    padding-top: var(--odstep);
+  }
+  .nav ul { flex-direction: column; }
+  .nav a { justify-content: flex-start; padding: 0 var(--odstep); }
+  .tresc { padding-bottom: var(--odstep); }
+}
+
+/* ---- Wspólne elementy ---- */
+.przycisk {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: var(--cel-dotyku); padding: 0 1.25rem;
+  font: inherit; font-weight: 600;
+  border: 2px solid var(--kolor-akcent); border-radius: var(--promien);
+  background: var(--kolor-powierzchnia); color: var(--kolor-akcent);
+  text-decoration: none; cursor: pointer;
+}
+.przycisk--glowny { background: var(--kolor-akcent); color: var(--kolor-akcent-tekst); }
+
+.okruszki ol { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0 0 var(--odstep); padding: 0; color: var(--kolor-tekst-slaby); }
+.okruszki li + li::before { content: '›'; margin-right: 0.5rem; }
+
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.karta { background: var(--kolor-powierzchnia); border: 1px solid var(--kolor-obramowanie); border-radius: var(--promien); padding: var(--odstep); }
+.znacznik { font-weight: 600; } /* typ terminu: ikona + tekst, nie sam kolor (praktyka 10) */

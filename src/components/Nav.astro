@@ -1,0 +1,19 @@
+---
+import { url, stripBase } from '../lib/url';
+
+const aktualna = stripBase(Astro.url.pathname);
+const pozycje = [
+  { href: '/', etykieta: 'Start' },
+  { href: '/terminy', etykieta: 'Terminy' },
+  { href: '/dodaj', etykieta: 'Dodaj termin' },
+];
+---
+<nav class="nav" aria-label="Główna nawigacja">
+  <ul>
+    {pozycje.map((p) => (
+      <li>
+        <a href={url(p.href)} aria-current={aktualna === p.href ? 'page' : undefined}>{p.etykieta}</a>
+      </li>
+    ))}
+  </ul>
+</nav>

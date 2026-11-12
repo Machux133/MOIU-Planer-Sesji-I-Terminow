@@ -1,0 +1,14 @@
+[
+  { "id": "t1",  "przedmiot": "Analiza matematyczna", "typ": "egzamin",   "data": "2027-01-26", "godzina": "09:00", "sala": "A-101", "zakres": "Szeregi, całki wielokrotne, równania różniczkowe", "notatki": "Dozwolona jedna kartka A4 ze wzorami.", "przypomnienie": "3d" },
+  { "id": "t2",  "przedmiot": "Metody opracowywania interfejsów użytkownika", "typ": "projekt", "data": "2027-01-12", "godzina": "23:59", "sala": "Teams", "zakres": "Oddanie repozytorium i dokumentacji PDF", "notatki": "Pokaz 13.01: 7 min prezentacji + 3 min pytań.", "przypomnienie": "3d" },
+  { "id": "t3",  "przedmiot": "Metody opracowywania interfejsów użytkownika", "typ": "kolokwium", "data": "2026-12-09", "godzina": "12:00", "sala": "B-204", "zakres": "Wykłady 1-4", "notatki": "", "przypomnienie": "1d" },
+  { "id": "t4",  "przedmiot": "Bazy danych", "typ": "kolokwium", "data": "2026-12-15", "godzina": "10:15", "sala": "C-12", "zakres": "SQL: JOIN-y, agregacje, podzapytania", "notatki": "Powtórzyć GROUP BY i HAVING.", "przypomnienie": "1d" },
+  { "id": "t5",  "przedmiot": "Bazy danych", "typ": "egzamin", "data": "2027-02-02", "godzina": "11:00", "sala": "C-12", "zakres": "Całość wykładu", "notatki": "", "przypomnienie": "3d" },
+  { "id": "t6",  "przedmiot": "Sieci komputerowe", "typ": "kolokwium", "data": "2026-12-17", "godzina": "14:00", "sala": "B-110", "zakres": "Model OSI, adresacja IPv4, podsieci", "notatki": "", "przypomnienie": "1d" },
+  { "id": "t7",  "przedmiot": "Sieci komputerowe", "typ": "egzamin", "data": "2027-01-29", "godzina": "08:30", "sala": "B-110", "zakres": "Całość materiału", "notatki": "", "przypomnienie": "3d" },
+  { "id": "t8",  "przedmiot": "Fizyka", "typ": "kolokwium", "data": "2026-12-03", "godzina": "16:00", "sala": "A-305", "zakres": "Elektrostatyka, prąd stały", "notatki": "Zadania jak z listy nr 4.", "przypomnienie": "1d" },
+  { "id": "t9",  "przedmiot": "Fizyka", "typ": "egzamin", "data": "2027-01-21", "godzina": "10:00", "sala": "A-305", "zakres": "Elektromagnetyzm, optyka", "notatki": "", "przypomnienie": "3d" },
+  { "id": "t10", "przedmiot": "Programowanie obiektowe", "typ": "projekt", "data": "2026-12-20", "godzina": "23:59", "sala": "Teams", "zakres": "Projekt zespołowy: kod + krótkie demo", "notatki": "", "przypomnienie": "3d" },
+  { "id": "t11", "przedmiot": "Programowanie obiektowe", "typ": "egzamin", "data": "2027-01-27", "godzina": "13:00", "sala": "Lab 3", "zakres": "Dziedziczenie, polimorfizm, wzorce projektowe", "notatki": "", "przypomnienie": "1d" },
+  { "id": "t12", "przedmiot": "Język angielski", "typ": "kolokwium", "data": "2026-12-10", "godzina": "08:00", "sala": "D-07", "zakres": "Słownictwo techniczne, czasy gramatyczne", "notatki": "", "przypomnienie": "none" }
+]
