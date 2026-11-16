@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K1 · Wzorce i formularz · Planer sesji</title>
+<style>
+
+  /* Ten sam zestaw tokenów co src/styles/global.css, żeby dokument wyglądał jak aplikacja. */
+  :root {
+    --tlo: #f6f7fb; --pow: #fff; --tekst: #1b1f2a; --slaby: #4a5163;
+    --akcent: #2f3fd0; --obr: #c9cfdd;
+    --lofi-linia: #555; --lofi-wypelnienie: #eee; --lofi-pasek: #c8c8c8;
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 1rem/1.55 var(--font); color: var(--tekst); background: var(--tlo); }
+  main { max-width: 60rem; margin: 0 auto; padding: 1rem; }
+  h1 { font-size: 1.9rem; margin: 1.5rem 0 .25rem; }
+  h2 { font-size: 1.35rem; margin: 2.25rem 0 .5rem; border-bottom: 2px solid var(--obr); padding-bottom: .25rem; }
+  h3 { font-size: 1.05rem; margin: 1.5rem 0 .4rem; }
+  .meta { color: var(--slaby); margin: 0 0 1rem; }
+  table { border-collapse: collapse; width: 100%; background: var(--pow); font-size: .95rem; }
+  th, td { border: 1px solid var(--obr); padding: .4rem .6rem; text-align: left; vertical-align: top; }
+  th { background: #eceef6; }
+  figure { margin: 1rem 0; background: var(--pow); border: 1px solid var(--obr); border-radius: .5rem; padding: .75rem; }
+  figcaption { color: var(--slaby); font-size: .9rem; margin-top: .5rem; }
+  figure svg { display: block; width: 100%; height: auto; }
+  ol.adnotacje { padding-left: 1.4rem; font-size: .95rem; }
+  .uwaga { background: #eef0fd; border-left: 4px solid var(--akcent); padding: .6rem .8rem; border-radius: .25rem; }
+
+  /* Magic UI „Dot Pattern”: tło z kropek pod mapą ekranów, czysty CSS. */
+  .kropki {
+    background-color: var(--pow);
+    background-image: radial-gradient(circle, #cfd4e3 1.2px, transparent 1.3px);
+    background-size: 18px 18px;
+  }
+
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body { background: #fff; font-size: 10.5pt; }
+    main { max-width: none; padding: 0; }
+
+    figure, table, .uwaga { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+
+
+.eyebrow{color:var(--akcent);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:2rem}
+.intro{max-width:46rem}.links{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0 2rem}a{color:var(--akcent)}a:focus-visible{outline:3px solid var(--akcent);outline-offset:4px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1.25rem;border:1px solid var(--obr);border-radius:.75rem}.step{background:white;border:1px solid var(--obr);padding:1rem;border-radius:.5rem}.step b{display:block;margin-bottom:.4rem}.step span{color:var(--slaby);font-size:.9rem}.number{color:var(--akcent);font-weight:700;font-size:.8rem}
+.table-wrap{overflow-x:auto}td:first-child{font-weight:600}td{vertical-align:top}th{white-space:nowrap}
+.mockup{display:grid;grid-template-columns:10rem 1fr;background:#fff;border:2px solid #555;border-radius:.75rem;overflow:hidden;color:#333}.mock-nav{background:#eee;padding:1.25rem .75rem;border-right:1px solid #888}.mock-nav strong{display:block;margin-bottom:1.5rem}.mock-nav div{padding:.8rem;border:1px solid #999;border-radius:.35rem;margin:.5rem 0}.mock-nav .active{background:#555;color:white;font-weight:700}.mock-main{padding:1.5rem 2rem}.crumb{font-size:.8rem;color:#555}.mock-main h3{font-size:1.65rem;margin:.7rem 0 .25rem}.hint{font-size:.85rem;color:#555}.mock-label{display:block;font-weight:600;margin:1rem 0 .35rem}.field{border:1px solid #888;border-radius:.25rem;padding:.65rem .8rem;min-height:2.7rem;background:#fff}.select{display:flex;justify-content:space-between}.choices{display:flex;flex-wrap:wrap;gap:.5rem}.choice{border:1px solid #999;padding:.6rem .8rem;border-radius:.3rem}.choice.selected{background:#eee;border:2px solid #444;font-weight:600}.pair{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem}.field.invalid{border:2px solid #222;outline:2px solid #aaa;outline-offset:2px;color:#666}.error{display:block;font-size:.85rem;font-weight:700;margin-top:.4rem}.textarea{min-height:4rem}.actions{display:flex;align-items:center;gap:1.5rem;margin-top:1.5rem}.primary{background:#444;color:#fff;padding:.8rem 1.4rem;border-radius:.3rem;font-weight:700}.callout{display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border:1px solid #555;border-radius:50%;font-size:.75rem;margin-left:.35rem;background:#eee;color:#222}.notes{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem}.notes li{margin:.6rem 0}.sources{margin:2rem 0;color:var(--slaby);font-size:.85rem;border-top:1px solid var(--obr);padding-top:1rem}
+@media(max-width:42rem){.steps,.notes,.pair{grid-template-columns:1fr}.mockup{grid-template-columns:1fr}.mock-nav{display:none}.mock-main{padding:1rem}.steps{padding:.75rem}.table-wrap table{min-width:38rem}}
+@media print{.links{display:none}.mockup{grid-template-columns:8rem 1fr}.mock-main{padding:1rem}.mock-label{margin-top:.6rem}.field{padding:.35rem .6rem;min-height:1.8rem}.actions{margin-top:1rem}.steps{gap:.5rem;padding:.5rem}figure{break-inside:avoid}.table-wrap{overflow:visible}.mockup-section{break-before:page}.sources{font-size:9pt}}
+</style>
+</head>
+<body><main>
+<p class="eyebrow">Zespół 8 / K1 / 17 listopada 2026</p>
+<h1>K1: wzorce i formularz</h1>
+<p class="meta">Planer sesji i terminów · Metody opracowywania interfejsów użytkownika · semestr zimowy 2026/27</p><p class="meta">Zespół: Bartosz Kurbiel (177909), Mateusz Machowski (179734). Grupa laboratoryjna: 2 (LB2).</p>
+<p class="intro">Student chce zapisać kolejne zaliczenie i wrócić do nauki. Formularz prowadzi go przez potrzebne dane, proponuje przypomnienie i pomaga poprawić błąd bez ponownego wypełniania pól.</p>
+<nav class="links" aria-label="Materiały K1"><a href="nawigacja-i-makiety.html">Nawigacja i makiety</a><a href="K1-zespol-8.pdf">Wspólny PDF do oddania</a><a href="#formularz">Zobacz makietę formularza ↓</a></nav>
+<p class="uwaga"><strong>Zakres opracowania:</strong> dobór wzorców i projekt formularza. To opis planowanego zachowania — formularz w aplikacji jest jeszcze szkieletem. Materiał stanowi rozwinięcie dwustronicowego dokumentu zespołu.</p>
+<h2>1. Wzorce: gdzie i dlaczego</h2>
+<p>Siedem wzorców dobranych do czterech ekranów aplikacji. Każdy odpowiada konkretnemu zadaniu studenta; wzorce formularza pokazuje makieta poniżej.</p>
+<div class="table-wrap"><table><thead><tr><th>Wzorzec</th><th>Gdzie</th><th>Dlaczego</th></tr></thead><tbody><tr><td>Ramy Graficzne</td><td>Wszystkie ekrany: stałe menu, typografia i przyciski.</td><td>Student rozpoznaje te same polecenia w całej aplikacji.</td></tr><tr><td>Wybór Dwupanelowy</td><td>Lista na komputerze: terminy i szczegóły obok.</td><td>Student porównuje zakresy zaliczeń bez opuszczania listy.</td></tr><tr><td>Okruszki</td><td>Szczegóły i formularz: Start › Terminy › bieżący ekran.</td><td>Student wie, gdzie jest, i może wrócić do listy.</td></tr><tr><td>Pionowy Stos</td><td>Start na telefonie: karta, polecenie i następne terminy.</td><td>Student przegląda terminy bez przewijania w bok.</td></tr><tr><td>Poprawne Wartości Domyślne</td><td>Formularz: przypomnienie „1 dzień przed”.</td><td>Student zapisuje termin szybciej, zachowując możliwość zmiany przypomnienia.</td></tr><tr><td>Zlokalizowane Komunikaty O Błędach</td><td>Formularz: „Wybierz datę zaliczenia” pod pustą datą.</td><td>Student wie, co poprawić, i nie musi ponownie wpisywać pozostałych danych.</td></tr><tr><td>Wskazane Punkty Startowe</td><td>Start: „Dodaj termin” i „Zobacz wszystkie terminy”.</td><td>Student od razu może dodać zaliczenie lub przejrzeć terminy.</td></tr></tbody></table>
+</div>
+<h2>2. Przebieg dodawania terminu</h2>
+<div class="steps kropki"><div class="step"><div class="number">01 / WPROWADŹ</div><b>Dodaj termin</b><span>Student wybiera przedmiot i typ, podaje datę oraz godzinę. Przypomnienie ma wartość „1 dzień przed”.</span></div><div class="step"><div class="number">02 / SPRAWDŹ</div><b>Zapisz termin</b><span>Brak daty zatrzymuje zapis. Komunikat pojawia się pod datą, fokus trafia do tego pola, a pozostałe dane zostają.</span></div><div class="step"><div class="number">03 / WRÓĆ</div><b>Termin zapisany</b><span>Po poprawieniu danych zapis prowadzi na listę z potwierdzeniem. „Anuluj” wraca do listy bez zapisywania.</span></div></div>
+<section class="mockup-section" id="formularz">
+<h2>3. Makieta low-fi: „Dodaj termin”</h2>
+<p><strong>Stan po próbie zapisu:</strong> student wybrał przedmiot „Bazy danych”, typ „Kolokwium” i godzinę 10:15, ale pominął datę. Makieta pokazuje błąd oraz zachowane wartości. Szarości oznaczają strukturę, wybór i hierarchię, a nie ostateczną kolorystykę.</p>
+<figure>
+<div class="mockup" role="img" aria-label="Makieta formularza Dodaj termin: wybrane Bazy danych, Kolokwium, godzina 10:15; pusta data z komunikatem Wybierz datę zaliczenia; przypomnienie 1 dzień przed; zachowane dane opcjonalne.">
+<aside class="mock-nav"><strong>Planer sesji</strong><div>Start</div><div>Terminy</div><div class="active">Dodaj termin</div></aside>
+<div class="mock-main"><div class="crumb">Start › Terminy › Dodaj termin</div><h3>Dodaj termin</h3><div class="hint">* Pole wymagane <span class="callout">1</span></div>
+<div class="mock-label">Przedmiot *</div><div class="field select"><span>Bazy danych</span><span>▾</span></div>
+<div class="mock-label">Typ zaliczenia *</div><div class="choices"><div class="choice selected">◉ Kolokwium</div><div class="choice">○ Egzamin</div><div class="choice">○ Projekt</div></div>
+<div class="pair"><div><div class="mock-label">Data * <span class="callout">2</span></div><div class="field invalid">dd.mm.rrrr</div><span class="error">! Wybierz datę zaliczenia</span></div><div><div class="mock-label">Godzina *</div><div class="field">10:15</div></div></div>
+<div class="mock-label">Przypomnienie <span class="callout">3</span></div><div class="field select"><span>1 dzień przed</span><span>▾</span></div><div class="hint">Domyślnie. Do wyboru także: brak, 3 dni przed, 7 dni przed.</div>
+<div class="mock-label">Sala (opcjonalnie) <span class="callout">4</span></div><div class="field">C-12</div>
+<div class="mock-label">Zakres materiału (opcjonalnie)</div><div class="field textarea">SQL: JOIN-y, agregacje</div>
+<div class="mock-label">Notatki (opcjonalnie)</div><div class="field textarea">Powtórzyć GROUP BY.</div>
+<div class="actions"><div class="primary">Zapisz termin</div><div>Anuluj</div><span class="callout">5</span></div>
+</div></div>
+<figcaption>Rys. 1. Formularz z lokalnym komunikatem błędu. Etykiety pozostają nad polami; błąd jest oznaczony tekstem i obramowaniem. To statyczna makieta, nie działający formularz.</figcaption>
+</figure>
+<ol class="adnotacje notes"><li><strong>Wymagane pola:</strong> przedmiot, typ, data i godzina. Gwiazdka ma wyjaśnienie przed pierwszym polem.</li><li><strong>Naprawa błędu:</strong> komunikat przy dacie wskazuje, co uzupełnić. Fokus i zachowane wartości ułatwiają ponowny zapis.</li><li><strong>Wartość domyślna:</strong> „1 dzień przed” jest wybrane od razu; student może zmienić ustawienie lub wyłączyć przypomnienie.</li><li><strong>Tylko potrzebne dane:</strong> sala, zakres i notatki są opcjonalne, więc ich brak nie blokuje zapisania terminu.</li><li><strong>Polecenia:</strong> „Zapisz termin” dominuje, a „Anuluj” zapewnia drogę powrotu do listy.</li></ol>
+</section>
+<h2>4. Plan walidacji i obsługi</h2>
+<div class="table-wrap"><table><thead><tr><th>Pole / sytuacja</th><th>Reguła</th><th>Informacja dla studenta</th></tr></thead><tbody>
+<tr><td>Przedmiot i typ</td><td>Wybór przedmiotu i jednej z trzech form zaliczenia.</td><td>„Wybierz przedmiot.” / „Wybierz typ zaliczenia.”</td></tr>
+<tr><td>Data</td><td>Wymagana, rzeczywista i nie z przeszłości.</td><td>„Wybierz datę zaliczenia.” / „Wybierz dzisiejszą lub przyszłą datę.”</td></tr>
+<tr><td>Godzina</td><td>Wymagana, poprawna godzina w formacie GG:MM.</td><td>„Podaj godzinę zaliczenia, np. 10:15.”</td></tr>
+<tr><td>Przypomnienie</td><td>Wybór: brak, 1, 3 lub 7 dni przed.</td><td>Domyślnie „1 dzień przed”; ustawienie zapisane z terminem.</td></tr>
+<tr><td>Błąd przy zapisie</td><td>Zapis wstrzymany; wszystkie wpisane dane zachowane.</td><td>Komunikaty przy polach; fokus na pierwszym błędnym polu.</td></tr>
+</tbody></table></div>
+<p class="uwaga"><strong>Klawiatura i telefon:</strong> Przechodzenie klawiszem Tab będzie zgodne z kolejnością pól. Etykiety będą powiązane z kontrolkami, komunikaty błędów z polami przez <code>aria-describedby</code>, a błędne pola oznaczone <code>aria-invalid</code>. Na telefonie pola ułożą się w Pionowy Stos; data i godzina otrzymają natywne kontrolki. Ustawienie przypomnienia nie oznacza jeszcze wdrożenia systemu powiadomień.</p>
+<footer class="sources"><strong>Podstawa:</strong> KARTA_PROJEKTU.pdf, temat 8 w TEMATY_PROJEKTOW.pdf oraz PROJEKT_krok_po_kroku.pdf (slajdy 10–14). Styl dokumentu dopasowano do <a href="nawigacja-i-makiety.html">opracowania nawigacji i makiet</a>. Do Teams trafia wspólny <a href="K1-zespol-8.pdf">K1-zespol-8.pdf</a>.</footer>
+</main></body></html>

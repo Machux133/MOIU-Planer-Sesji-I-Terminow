@@ -3,7 +3,7 @@
 Projekt z przedmiotu *Metody opracowywania interfejsów użytkownika* (semestr zimowy 2026/27).
 Temat nr 8: **Planer sesji i terminów**.
 
-**Zespół:** _(uzupełnić: numery albumów)_ · grupa lab.: _(uzupełnić)_
+**Zespół:** Bartosz Kurbiel (177909), Mateusz Machowski (179734) · grupa lab.: **2 (LB2)**
 
 **Dokumentacja (PDF):** [`docs/`](docs/) _(link po L9)_
 

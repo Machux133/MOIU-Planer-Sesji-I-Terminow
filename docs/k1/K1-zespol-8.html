@@ -1,0 +1,94 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>K1 — zespół 8</title><style>@page{size:A4;margin:11mm}*{box-sizing:border-box}body{font:10pt/1.3 Arial,sans-serif;color:#222;margin:0}h1{font-size:21pt;margin:0 0 3mm}h2{font-size:13pt;margin:5mm 0 2mm}h3{font-size:16pt;margin:2mm 0}p{margin:2mm 0}small,.small{font-size:8.5pt}.page{page-break-after:always}.page:last-child{page-break-after:auto}.meta{padding:3mm;background:#eee}table{border-collapse:collapse;width:100%;font-size:9pt}td,th{border:1px solid #aaa;padding:2.3mm;text-align:left;vertical-align:top}th{background:#eee}td:first-child{width:26%;font-weight:bold}td:nth-child(2){width:35%}.desktop svg{width:100%;height:94mm}.bottom{display:grid;grid-template-columns:112mm 68mm;gap:8mm;margin-top:3mm}.phone svg{width:68mm;height:136mm}figure{margin:0}figcaption{font-size:8.5pt;margin-top:1mm}.form{border:1.5px solid #555;border-radius:3mm;padding:3mm;font-size:9pt}.crumb{font-size:8pt}.form label{display:block;font-weight:bold;margin:2mm 0 .5mm}.field{border:1px solid #888;min-height:7mm;padding:1.2mm 2mm}.field span{float:right}.pair{display:grid;grid-template-columns:1.4fr 1fr;gap:3mm}.error{border:2px solid #222}.err{font-size:8pt}.radios{font-size:9pt;padding:1mm 0}.actions{display:flex;align-items:center;gap:6mm;margin-top:3mm}.actions b{background:#444;color:white;padding:2.5mm 5mm}.footer{border-top:1px solid #aaa;margin-top:4mm;padding-top:2mm;font-size:8pt}.lofi .nr{display:none}.lofi .ciemne{fill:#555}.lofi .t-maly{font-size:14px!important;fill:#333}/* Makiety low-fi: tylko odcienie szarości, bez koloru (to jeszcze nie projekt graficzny). */
+  .lofi { font-family: var(--font), sans-serif; }
+  .lofi .ramka { fill: #fff; stroke: var(--lofi-linia); stroke-width: 2; }
+  .lofi .pole { fill: #fff; stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .pole-mocne { fill: #fff; stroke: #222; stroke-width: 3.5; }
+  .lofi .szare { fill: var(--lofi-wypelnienie); stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .ciemne { fill: #9a9a9a; stroke: var(--lofi-linia); stroke-width: 1.5; }
+  .lofi .pasek { fill: var(--lofi-pasek); }
+  .lofi text { fill: #333; font-size: 14px; }
+  .lofi .t-duzy { font-size: 24px; font-weight: 700; }
+  .lofi .t-sr { font-size: 16px; font-weight: 600; }
+  .lofi .t-maly { font-size: 12px; fill: #666; }
+  .lofi .t-liczba { font-size: 56px; font-weight: 800; }
+  .lofi .t-bialy { fill: #fff; font-weight: 600; }
+  .lofi .nr circle { fill: var(--akcent); }
+  .lofi .nr text { fill: #fff; font-size: 13px; font-weight: 700; text-anchor: middle; }
+
+  .lofi .nr{display:none}.lofi .ciemne{fill:#555}.lofi .t-maly{font-size:14px;fill:#333}h2{margin-top:3mm}td,th{padding:1.6mm}body{font-size:9.5pt}.desktop svg{height:89mm}.phone svg{height:128mm}.bottom{margin-top:2mm}.footer{margin-top:2mm}.form label{margin-top:1.4mm}.field{min-height:6mm}:root{--lofi-linia:#555;--lofi-wypelnienie:#eee;--lofi-pasek:#ccc;--font:Arial,sans-serif}.desktop svg{height:85mm}.form{padding:2mm}.form label{margin-top:1mm}.actions{margin-top:2mm}.footer{font-size:7.5pt}</style></head><body><section class="page"><h1>Planer sesji i terminów</h1><div class="meta"><b>K1 · Zespół 8 · Temat 8 · 17.11.2026</b><br>Bartosz Kurbiel, album 177909<br>Mateusz Machowski, album 179734<br>Grupa laboratoryjna: 2 (LB2)<br><small>Metody opracowywania interfejsów użytkownika · semestr zimowy 2026/27</small></div><h2>Użytkownik i główny cel</h2><p>Użytkownikiem jest student planujący zaliczenia i egzaminy, który między zajęciami sprawdza najbliższy termin na telefonie lub komputerze. Chce mieć wszystkie terminy w jednym miejscu, szybko poznać zakres materiału i zapisać kolejne zaliczenie, aby żadnego nie przegapić.</p><h2>Mapa czterech ekranów i powroty</h2><svg viewBox="0 0 760 205" style="width:100%;height:47mm" role="img" aria-label="Mapa czterech ekranów: Start, Terminy, Szczegóły i Formularz, z podpisanymi przejściami i powrotami"><defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0L7 3.5L0 7" fill="#555"/></marker></defs><g fill="white" stroke="#777"><rect x="10" y="20" width="190" height="50" rx="5"/><rect x="285" y="20" width="190" height="50" rx="5"/><rect x="560" y="20" width="190" height="50" rx="5"/><rect x="285" y="145" width="190" height="50" rx="5"/></g><g font-family="Arial" font-size="15" text-anchor="middle" fill="#222"><text x="105" y="42" font-weight="bold">Start</text><text x="105" y="60">/</text><text x="380" y="42" font-weight="bold">Terminy</text><text x="380" y="60">/terminy</text><text x="655" y="42" font-weight="bold">Szczegóły</text><text x="655" y="60">/termin?id=…</text><text x="380" y="166" font-weight="bold">Dodaj / edytuj termin</text><text x="380" y="184">/dodaj[?id=…]</text></g><g fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"><path d="M200 32H285"/><path d="M285 58H200"/><path d="M475 32H560"/><path d="M560 58H475"/><path d="M105 70V170H285"/><path d="M360 145V70"/><path d="M655 70V170H475"/><path d="M105 20V5H655V20"/></g><g fill="#333" font-family="Arial" font-size="12" text-anchor="middle"><text x="242" y="27">Lista</text><text x="242" y="74">Start</text><text x="517" y="27">Wybierz</text><text x="517" y="74">Wróć do listy</text><text x="188" y="164">Dodaj termin</text><text x="565" y="164">Edytuj termin</text><text x="380" y="103" text-anchor="start">Zapisz / Anuluj</text><text x="380" y="120" text-anchor="start">→ lista</text><text x="380" y="9" style="paint-order:stroke;stroke:white;stroke-width:5px">Karta najbliższego terminu</text></g></svg><p class="small">Z każdego ekranu powrót przez stałe menu: Start · Terminy · Dodaj termin. Na komputerze szczegóły są także panelem obok listy; na telefonie otwierają osobny ekran.</p><h2>Model nawigacji</h2><p><b>Model: wiele poziomów — płytka hierarchia ze stałą nawigacją.</b> Student przechodzi od listy do szczegółów zaliczenia, a widoczne menu i okruszki umożliwiają powrót do listy lub Startu. Dwa poziomy wystarczają do przeglądania terminów, a skrót „Dodaj termin” zapewnia szybki dostęp do formularza.</p><h2>Planowane wzorce interfejsu</h2><table><thead><tr><th>Wzorzec</th><th>Gdzie</th><th>Dlaczego</th></tr></thead><tbody><tr><td>Ramy Graficzne</td><td>Wszystkie ekrany: stałe menu, typografia i przyciski.</td><td>Student rozpoznaje te same polecenia w całej aplikacji.</td></tr><tr><td>Wybór Dwupanelowy</td><td>Lista na komputerze: terminy i szczegóły obok.</td><td>Student porównuje zakresy zaliczeń bez opuszczania listy.</td></tr><tr><td>Okruszki</td><td>Szczegóły i formularz: Start › Terminy › bieżący ekran.</td><td>Student wie, gdzie jest, i może wrócić do listy.</td></tr><tr><td>Pionowy Stos</td><td>Start na telefonie: karta, polecenie i następne terminy.</td><td>Student przegląda terminy bez przewijania w bok.</td></tr><tr><td>Poprawne Wartości Domyślne</td><td>Formularz: przypomnienie „1 dzień przed”.</td><td>Student zapisuje termin szybciej, zachowując możliwość zmiany przypomnienia.</td></tr><tr><td>Zlokalizowane Komunikaty O Błędach</td><td>Formularz: „Wybierz datę zaliczenia” pod pustą datą.</td><td>Student wie, co poprawić, i nie musi ponownie wpisywać pozostałych danych.</td></tr><tr><td>Wskazane Punkty Startowe</td><td>Start: „Dodaj termin” i „Zobacz wszystkie terminy”.</td><td>Student od razu może dodać zaliczenie lub przejrzeć terminy.</td></tr></tbody></table><p class="footer">Stan projektu: Astro + React, TypeScript, CSS; dane JSON i localStorage. Start, lista i szczegóły są zaimplementowane. Formularz, walidacja przy polach, edycja, usuwanie i potwierdzenia to plan dalszej realizacji.</p></section><section class="page"><h2 style="margin-top:0">Makiety low-fi · zespół 8</h2><figure class="desktop"><svg class="lofi" viewBox="0 0 960 560" role="img" aria-label="Makieta listy terminów na szerokim ekranie: boczna nawigacja, filtr przedmiotu, lista kart po lewej i szczegóły wybranego terminu po prawej">
+    <rect class="ramka" x="1" y="1" width="958" height="558" rx="10" />
+    <rect class="szare" x="1" y="1" width="958" height="32" rx="10" />
+    <circle cx="20" cy="17" r="5" class="pole" /><circle cx="38" cy="17" r="5" class="pole" /><circle cx="56" cy="17" r="5" class="pole" />
+    <rect class="pole" x="90" y="8" width="420" height="18" rx="9" /><text class="t-maly" x="100" y="21">…/MOIU-Planer-Sesji-I-Terminow/terminy</text>
+
+    <rect class="szare" x="1" y="33" width="200" height="526" />
+    <text class="t-sr" x="20" y="66">Planer sesji</text>
+    <rect class="pole" x="12" y="84" width="176" height="44" rx="6" /><text x="28" y="111">Start</text>
+    <rect class="ciemne" x="12" y="136" width="176" height="44" rx="6" /><text class="t-bialy" x="28" y="163">Terminy</text>
+    <rect class="pole" x="12" y="188" width="176" height="44" rx="6" /><text x="28" y="215">Dodaj termin</text>
+
+    <text class="t-maly" x="224" y="62">Start  ›  Terminy</text>
+    <text class="t-duzy" x="224" y="98">Terminy</text>
+    <rect class="ciemne" x="224" y="116" width="92" height="34" rx="17" /><text class="t-bialy" x="240" y="138">Wszystkie</text>
+    <rect class="pole" x="324" y="116" width="150" height="34" rx="17" /><text x="340" y="138">Analiza mat.</text>
+    <rect class="pole" x="482" y="116" width="80" height="34" rx="17" /><text x="500" y="138">MOIU</text>
+    <rect class="pole" x="570" y="116" width="128" height="34" rx="17" /><text x="586" y="138">Bazy danych</text>
+
+    <!-- karta pilna: grubsza ramka + tekst „Za 3 dni” -->
+    <rect class="pole-mocne" x="224" y="168" width="340" height="74" rx="8" />
+    <rect class="ciemne" x="224" y="168" width="10" height="74" />
+    <text class="t-sr" x="248" y="195">Bazy danych</text><text class="t-maly" x="248" y="222">▲ Kolokwium · 15.11, 10:15</text>
+    <rect class="szare" x="468" y="180" width="84" height="24" rx="12" /><text class="t-maly" x="478" y="197">! Za 3 dni</text>
+
+    <rect class="pole" x="224" y="252" width="340" height="74" rx="8" />
+    <text class="t-sr" x="248" y="279">MOIU</text><text class="t-maly" x="248" y="306">▲ Kolokwium · 09.12, 12:00</text>
+    <text class="t-maly" x="490" y="279">za 27 dni</text>
+
+    <rect class="pole" x="224" y="336" width="340" height="74" rx="8" />
+    <text class="t-sr" x="248" y="363">MOIU</text><text class="t-maly" x="248" y="390">■ Projekt · 12.01, 23:59</text>
+    <text class="t-maly" x="490" y="363">za 61 dni</text>
+
+    <rect class="pole" x="224" y="420" width="340" height="74" rx="8" stroke-width="3" />
+    <rect class="szare" x="224" y="420" width="340" height="74" rx="8" opacity=".6" />
+    <text class="t-sr" x="248" y="447">Analiza matematyczna</text><text class="t-maly" x="248" y="474">● Egzamin · 26.01, 09:00</text>
+    <text class="t-maly" x="490" y="447">za 75 dni</text>
+
+    <!-- panel szczegółów -->
+    <rect class="pole" x="584" y="168" width="356" height="372" rx="8" />
+    <text class="t-duzy" x="604" y="206" style="font-size:20px">Analiza matematyczna</text>
+    <rect class="szare" x="604" y="220" width="96" height="26" rx="13" /><text class="t-maly" x="614" y="238">● Egzamin</text>
+    <text class="t-sr" x="604" y="278">26.01.2027, 09:00</text><text class="t-maly" x="604" y="298">za 75 dni</text>
+    <text class="t-maly" x="604" y="330">Sala</text><rect class="pasek" x="700" y="320" width="70" height="12" rx="6" />
+    <text class="t-maly" x="604" y="356">Zakres</text><rect class="pasek" x="700" y="346" width="210" height="12" rx="6" /><rect class="pasek" x="700" y="364" width="150" height="12" rx="6" />
+    <text class="t-maly" x="604" y="400">Notatki</text><text class="t-maly" x="700" y="400">brak</text>
+    <rect class="ciemne" x="604" y="474" width="150" height="46" rx="6" /><text class="t-bialy" x="624" y="502">Edytuj termin</text>
+    <rect class="pole" x="766" y="474" width="150" height="46" rx="6" /><text x="788" y="502">Usuń termin</text>
+
+    <g class="nr"><circle cx="196" cy="160" r="12" /><text x="196" y="165">1</text></g>
+    <g class="nr"><circle cx="712" cy="133" r="12" /><text x="712" y="138">2</text></g>
+    <g class="nr"><circle cx="572" cy="192" r="12" /><text x="572" y="197">3</text></g>
+    <g class="nr"><circle cx="572" cy="430" r="12" /><text x="572" y="435">4</text></g>
+    <g class="nr"><circle cx="928" cy="292" r="12" /><text x="928" y="297">5</text></g>
+  </svg><figcaption>1. Lista na komputerze — filtr przedmiotu, pilny termin i szczegóły obok. Przykładowe daty względem 12.11.2026; pilny termin przesunięto na 15.11.</figcaption></figure><div class="bottom"><figure><div class="form"><div class="crumb">Start › Terminy › Dodaj termin</div><h3>Dodaj termin</h3><small>* Pole wymagane</small><label>Przedmiot *</label><div class="field">Bazy danych <span>▾</span></div><label>Typ zaliczenia *</label><div class="radios">◉ Kolokwium　 ○ Egzamin　 ○ Projekt</div><div class="pair"><div><label>Data *</label><div class="field error">dd.mm.rrrr</div><b class="err">! Wybierz datę zaliczenia</b></div><div><label>Godzina *</label><div class="field">10:15</div></div></div><label>Przypomnienie</label><div class="field">1 dzień przed <span>▾</span></div><small>Domyślnie; możesz wybrać brak, 3 lub 7 dni przed.</small><label>Sala (opcjonalnie)</label><div class="field">C-12</div><label>Zakres materiału (opcjonalnie)</label><div class="field">SQL: JOIN-y, agregacje</div><label>Notatki (opcjonalnie)</label><div class="field">Powtórzyć GROUP BY.</div><div class="actions"><b>Zapisz termin</b><span>Anuluj</span></div></div><figcaption>2. Formularz po próbie zapisu bez daty. Wartości pozostają, fokus trafia do daty; komunikat jest bezpośrednio pod polem.</figcaption></figure><figure class="phone"><svg class="lofi" viewBox="0 0 360 720" role="img" aria-label="Makieta ekranu startowego na telefonie: duża karta najbliższego terminu z liczbą dni i przycisk Dodaj termin">
+      <rect class="ramka" x="2" y="2" width="356" height="716" rx="28" />
+      <rect class="pasek" x="140" y="16" width="80" height="8" rx="4" />
+      <text class="t-duzy" x="22" y="74">Planer sesji</text>
+      <text class="t-maly" x="22" y="112">NAJBLIŻSZY TERMIN</text>
+      <rect class="pole-mocne" x="20" y="124" width="320" height="230" rx="14" />
+      <rect class="szare" x="40" y="144" width="112" height="28" rx="14" /><text class="t-maly" x="52" y="163">▲ Kolokwium</text>
+      <text class="t-sr" x="40" y="204">Fizyka</text>
+      <text class="t-maly" x="40" y="226">03.12.2026, 16:00</text>
+      <text class="t-liczba" x="40" y="306">21</text><text class="t-sr" x="124" y="300">dni do terminu</text>
+      <text class="t-maly" x="40" y="336">Zobacz szczegóły ›</text>
+      <rect class="ciemne" x="20" y="374" width="320" height="56" rx="10" /><text class="t-bialy" x="118" y="408">+ Dodaj termin</text>
+      <text class="t-maly" x="22" y="466">NASTĘPNE</text>
+      <rect class="pole" x="20" y="478" width="320" height="52" rx="8" /><rect class="pasek" x="36" y="494" width="180" height="10" rx="5" /><rect class="pasek" x="36" y="510" width="110" height="8" rx="4" />
+      <rect class="pole" x="20" y="540" width="320" height="52" rx="8" /><rect class="pasek" x="36" y="556" width="160" height="10" rx="5" /><rect class="pasek" x="36" y="572" width="120" height="8" rx="4" />
+      <text class="t-maly" x="22" y="620">Zobacz wszystkie terminy ›</text>
+      <rect class="szare" x="2" y="652" width="356" height="66" rx="0" />
+      <rect class="ciemne" x="8" y="658" width="108" height="52" rx="8" /><text class="t-bialy" x="42" y="690">Start</text>
+      <text x="152" y="690">Terminy</text><text x="262" y="690">Dodaj</text>
+      <g class="nr"><circle cx="336" cy="128" r="12" /><text x="336" y="133">1</text></g>
+      <g class="nr"><circle cx="336" cy="380" r="12" /><text x="336" y="385">2</text></g>
+      <g class="nr"><circle cx="336" cy="656" r="12" /><text x="336" y="661">3</text></g>
+    </svg><figcaption>3. Start na telefonie, 360 px: jedna kolumna, najbliższy termin i dolne menu.</figcaption></figure></div><p class="small"><b>Plan walidacji:</b> wymagane: przedmiot, typ, data i godzina; data rzeczywista, nie z przeszłości, godzina poprawna. Błędy przy polach, zachowane dane. Sala, zakres i notatki opcjonalne. Przypomnienie można wyłączyć.</p><p class="footer">Makiety listy i telefonu: adaptacja nawigacja-i-makiety.html (skala, szarości, pominięte oznaczenia adnotacji). Podstawa: KARTA_PROJEKTU s. 3, TEMATY_PROJEKTOW temat 8, PROJEKT_krok_po_kroku slajdy 10–14.</p></section></body></html>
