@@ -1,0 +1,24 @@
+% 9. Dostępność
+\section{Dostępność}\label{sec:dostepnosc}
+
+\begin{instrukcja}[zalecane]
+Kontrast tekstu (co najmniej 4,5:1 dla zwykłego tekstu - Wykład 2), obsługa klawiaturą (Miłość Do Klawiatury
+z Wykładu 1: kolejność klawisza Tab, widoczne zaznaczenie), kolor nie jest jedynym nośnikiem informacji (Wykład 3). Wartości kontrastu sprawdźcie
+dowolnym narzędziem, np. w narzędziach deweloperskich przeglądarki.
+\end{instrukcja}
+
+\begin{table}[H]\centering
+\caption{Kontrast par kolorów}\label{tab:kontrast}
+\begin{tabularx}{\linewidth}{@{}Lp{2.4cm}p{2.4cm}p{2.2cm}p{2cm}@{}}
+\naglowektabeli \nt{Gdzie} & \nt{Tekst} & \nt{Tło} & \nt{Kontrast} & \nt{Wynik} \\
+tekst podstawowy na karcie & \#1B1F2A & \#FFFFFF & 16,5:1 & \tak \\
+tekst pomocniczy na tle strony & \#4A5163 & \#F6F7FB & 7,4:1 & \tak \\
+przycisk główny, aktywne menu & \#FFFFFF & \#2F3FD0 & 7,7:1 & \tak \\
+linki i liczba dni & \#2F3FD0 & \#FFFFFF & 7,7:1 & \tak \\
+znacznik pilnego terminu & \#B3261E & \#FDECEA & 5,7:1 & \tak \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Klawiatura:} pierwszy Tab pokazuje odnośnik „Przejdź do treści”, potem menu, okruszki, filtr i kolejne karty w kolejności czytania. Zaznaczenie to niebieska obwódka 3\,px (\texttt{:focus-visible}); na kartach obwódka obejmuje całą kartę. Pełny test klawiaturą zaplanowany na L7.\\
+\textbf{Kolor i znaczenie:} typ terminu to ikona i tekst (np. „Kolokwium”), a nie sam kolor tła; termin pilny ma gruby pasek z lewej, ikonę ostrzeżenia i tekst „Za 3 dni”. Animacje (licznik dni, obiegająca ramka) wyłączają się przy ustawieniu systemowym „ogranicz ruch”, a czytnik ekranu dostaje gotową liczbę dni z ukrytego tekstu.

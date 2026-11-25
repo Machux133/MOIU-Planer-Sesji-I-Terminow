@@ -1,0 +1,12 @@
+Oddanie L6 (25.11.2026) - Planer sesji i terminów, zespół 8 (LB2)
+Bartosz Kurbiel (177909), Mateusz Machowski (179734)
+
+Repozytorium: https://github.com/Machux133/MOIU-Planer-Sesji-I-Terminow
+
+Zrzut ekranu szkieletu aplikacji (ekran startowy z nawigacją): L6-ekran-startowy.png
+
+Co zostało zrobione:
+Działają ekran startowy (najbliższy termin jako dominująca karta z liczbą dni, przycisk „Dodaj termin”, następne terminy), lista terminów z filtrem po przedmiocie, znacznikami typu (ikona i tekst) i wyróżnieniem terminów pilnych oraz ekran szczegółów. Na szerokim ekranie szczegóły są w panelu obok listy, a na telefonie otwierają się jako osobny ekran z dolnym paskiem nawigacji. Zaczęliśmy dokumentację w szablonie LaTeX (rozdziały o nawigacji, wzorcach, wąskim ekranie i uruchomieniu).
+
+Plan na następne zajęcia (K2, 02.12):
+Dokończyć formularz „Dodaj termin” z walidacją przy polach i zapisem, dodać edycję i usuwanie terminu z możliwością cofnięcia oraz sprawdzić obsługę całego przepływu klawiaturą.

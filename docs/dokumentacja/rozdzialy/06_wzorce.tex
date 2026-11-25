@@ -1,0 +1,37 @@
+% 6. Zastosowane wzorce
+\section{Zastosowane wzorce}\label{sec:wzorce}
+
+\begin{instrukcja}[wymagane]
+Co najmniej \textbf{10 wzorców} z wykładów, które naprawdę są w projekcie, w tym z każdego z czterech
+wykładów co najmniej jeden. Przy każdym: na którym ekranie, \textbf{dlaczego właśnie tam} i z którego
+wykładu pochodzi. Nazwy wzorców jak na wykładach (np. \emph{Wybór Dwupanelowy},
+\emph{Zlokalizowane Komunikaty O Błędach}, \emph{Pionowy Stos}). Liczy się trafność uzasadnienia,
+nie liczba wzorców. Przy 2-3 najciekawszych dodajcie zrzut ekranu (podrozdział \ref{sec:wzorce-zrzuty}).
+\end{instrukcja}
+
+{\small
+\begin{longtable}{@{}p{0.6cm}p{3.7cm}p{2.6cm}p{6.1cm}p{1.1cm}@{}}
+\caption{Wzorce zastosowane w projekcie}\label{tab:wzorce}\\
+\naglowektabeli \nt{\#} & \nt{Wzorzec} & \nt{Ekran} & \nt{Dlaczego tutaj} & \nt{Wykł.} \\
+\endfirsthead
+\naglowektabeli \nt{\#} & \nt{Wzorzec} & \nt{Ekran} & \nt{Dlaczego tutaj} & \nt{Wykł.} \\
+\endhead
+\bottomrule
+\endfoot
+1 & Ramy Graficzne & wszystkie ekrany & student rozpoznaje te same polecenia i to samo menu na każdym ekranie; wspólny układ i tokeny CSS & 2 \\
+2 & Wybór Dwupanelowy & Terminy (szeroki ekran) & student porównuje zakresy kolejnych zaliczeń bez opuszczania listy & 2, 4 \\
+3 & Uszczegółowienie W Jednym Oknie & Terminy (wąski ekran) & na telefonie nie ma miejsca na listę i szczegóły obok siebie, więc karta otwiera osobny ekran z „Wróć do listy” & 2, 4 \\
+4 & Okruszki & Szczegóły, Dodaj termin, Terminy & student wie, gdzie jest, i może wrócić poziom wyżej niezależnie od historii przeglądarki & 1 \\
+5 & Wskazane Punkty Startowe & Start & „Dodaj termin” i „Zobacz wszystkie terminy” od razu pokazują, od czego zacząć & 1 \\
+6 & Centrum Uwagi & Start & karta najbliższego terminu z dużą liczbą dni odpowiada na główne pytanie studenta bez klikania & 2 \\
+7 & Pionowy Stos & Start i lista (wąski ekran) & na telefonie karta, polecenie i lista układają się jedna pod drugą, bez przewijania w bok & 4 \\
+8 & Dolny Pasek Nawigacyjny & wszystkie ekrany (wąski ekran) & menu w zasięgu kciuka, cele dotykowe 48\,px & 4 \\
+9 & Poprawne Wartości Domyślne & Dodaj termin (planowane) & przypomnienie „1 dzień przed” zaznaczone od razu przyspiesza zapis & 3 \\
+10 & Zlokalizowane Komunikaty O Błędach & Dodaj termin (planowane) & komunikat pod polem mówi, co poprawić, a wpisane dane zostają & 3 \\
+\end{longtable}}
+
+\subsection{Wybrane wzorce na zrzutach ekranu}\label{sec:wzorce-zrzuty}
+\zrzut{e2_lista.png}{Wybór Dwupanelowy na ekranie Terminy}{0.75}
+Na szerokim ekranie lista terminów i szczegóły wybranego terminu są obok siebie. Kliknięcie karty
+zmienia tylko panel po prawej i adres strony, więc student przegląda kolejne zaliczenia bez skakania
+między ekranami. Na wąskim ekranie ten sam klik otwiera osobny ekran szczegółów (rys.~\ref{rys:waski}).

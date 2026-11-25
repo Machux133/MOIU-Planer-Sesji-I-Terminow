@@ -1,0 +1,70 @@
+% 11. Implementacja
+\section{Implementacja}\label{sec:implementacja}
+
+\begin{instrukcja}[zalecane]
+Technologie z wersjami, struktura repozytorium i model danych. Nie wklejajcie całego kodu - wystarczą
+1-2 najciekawsze fragmenty z krótkim opisem (np. walidacja formularza, zmiana układu na wąskim ekranie).
+\end{instrukcja}
+
+\subsection{Technologie}
+\begin{table}[H]\centering
+\caption{Wykorzystane technologie}\label{tab:technologie}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}p{3.2cm}L@{}}
+\naglowektabeli \nt{Technologia} & \nt{Wersja} & \nt{Do czego} \\
+Astro & 7.4 & statyczna strona, routing plików, układ \texttt{Layout.astro} \\
+React + \texttt{@astrojs/react} & 19.3 / 7.1 & interaktywne wyspy: Start, lista, szczegóły \\
+TypeScript & 6.0 & typy danych (\texttt{Termin}) i logika \\
+motion & 14.12 & animacja licznika dni (wzór: Magic UI Number Ticker) \\
+lucide-react & 1.72 & ikony typów terminów i przycisków \\
+CSS (bez frameworka) & -- & tokeny kolorów i odstępów, układ szeroki i wąski \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Struktura repozytorium}
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+MOIU-Planer-Sesji-I-Terminow/
+|-- README.md
+|-- src/
+|   |-- pages/ (index, terminy, termin, dodaj = E1-E4)
+|   |-- layouts/Layout.astro (ramy graficzne, menu, skip-link)
+|   |-- components/ (Nav, Breadcrumbs, TerminCard, TypBadge,
+|   |               ListaTerminow, NajblizszyTermin, SzczegolyTerminu,
+|   |               NumberTicker, SpotlightCard)
+|   |-- lib/ (store.ts, format.ts, validate.ts, url.ts)
+|   |-- data/terminy.json (dane startowe)
+|   `-- styles/global.css (tokeny CSS)
+`-- docs/ (K1, dokumentacja)
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Model danych}
+Dane startowe są w \texttt{src/data/terminy.json} (12 terminów). Przy pierwszym wejściu aplikacja kopiuje je do \texttt{localStorage} i dalej wszystkie operacje działają tam (\texttt{store.ts}). Przykładowy rekord:
+\begin{lstlisting}[language=json]
+{
+  "id": "t3",
+  "przedmiot": "Metody opracowywania interfejsow uzytkownika",
+  "typ": "kolokwium",
+  "data": "2026-12-09",
+  "godzina": "12:00",
+  "sala": "B-204",
+  "zakres": "Wyklady 1-4",
+  "notatki": "",
+  "przypomnienie": "1d"
+}
+\end{lstlisting}
+
+\subsection{Wybrany fragment kodu}
+Na liście ten sam link zachowuje się różnie zależnie od szerokości ekranu (\texttt{TerminCard.tsx}):
+\begin{lstlisting}
+function klik(e) {
+  if (onWybierz && matchMedia('(min-width: 48rem)').matches) {
+    e.preventDefault();   // szeroki ekran: zostajemy na liscie
+    onWybierz(t.id);      // i pokazujemy szczegoly w panelu obok
+  }                       // waski ekran: zwykle przejscie do /termin?id=
+}
+\end{lstlisting}
+Karta jest zwykłym odnośnikiem, więc działa bez JavaScriptu, z klawiatury i w nowej karcie przeglądarki.
+Tylko na szerokim ekranie kliknięcie jest przechwytywane i zmienia panel szczegółów oraz adres strony
+(\texttt{history.replaceState}).

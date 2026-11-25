@@ -1,0 +1,38 @@
+% 14. Organizacja pracy
+\section{Organizacja pracy}\label{sec:organizacja}
+
+\begin{instrukcja}[wymagane]
+Kto za co odpowiadał i jak pracowaliście. Każda osoba musi umieć wyjaśnić dowolny fragment kodu -
+także ten, którego nie pisała. Przy narzędziach AI napiszcie konkretnie, do czego ich używaliście
+i czego nie robiły za Was.
+\end{instrukcja}
+
+\subsection{Podział pracy}
+\begin{table}[H]\centering
+\caption{Podział pracy w zespole}\label{tab:podzial}
+\begin{tabularx}{\linewidth}{@{}p{4.4cm}Lp{2cm}@{}}
+\naglowektabeli \nt{Osoba} & \nt{Za co odpowiadała} & \nt{Udział} \\
+Mateusz Machowski & ramy graficzne, nawigacja, ekrany E1-E3, wąski ekran; rozdziały 4, 5, 8 & \wpisz{50\%} \\
+Bartosz Kurbiel & repozytorium, formularz E4, walidacja, dane i operacje; rozdziały 7, 9 & \wpisz{50\%} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Sposób pracy}
+Zadania podzieliliśmy według terminów z harmonogramu w pliku \texttt{docs/PODZIAL\_PRACY.md}: osoba A
+odpowiada za ramy, start, listę i szczegóły, osoba B za formularz, dane i operacje. Kod jest w jednym
+repozytorium na GitHubie; każdą zmianę ogląda druga osoba.
+
+\subsection{Wykorzystanie narzędzi AI}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}p{3.2cm}L@{}}
+\naglowektabeli \nt{Narzędzie} & \nt{Kto używał} & \nt{Do czego} \\
+Claude Code (Anthropic) & M. Machowski & szkic komponentów listy, karty i szczegółów, efektów wizualnych (licznik dni, podświetlenie kart), zrzuty ekranu i pierwsza wersja tekstu dokumentacji \\
+\wpisz{...} & & \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+Decyzje projektowe (model nawigacji, wybór wzorców, zakres) podjęliśmy sami na podstawie wykładów
+i makiet z K1. Wygenerowany kod przeglądaliśmy i uruchamialiśmy na szerokim i wąskim ekranie; podczas
+sprawdzania zrzutów wyszły dwa błędy na telefonie (pasek menu przykryty przez karty, za szerokie pole
+wyboru), które poprawiliśmy. Każda osoba potrafi wyjaśnić kod obu części.

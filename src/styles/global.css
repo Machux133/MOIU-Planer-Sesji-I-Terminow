@@ -63,7 +63,7 @@ a { color: var(--kolor-akcent); }
 .tresc { flex: 1; padding: var(--odstep); padding-bottom: calc(var(--cel-dotyku) + 2rem); max-width: 60rem; width: 100%; margin: 0 auto; }
 
 .nav {
-  position: fixed; left: 0; right: 0; bottom: 0;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; /* nad kartami z position: relative */
   background: var(--kolor-powierzchnia);
   border-top: 1px solid var(--kolor-obramowanie);
 }
@@ -191,7 +191,7 @@ a { color: var(--kolor-akcent); }
   border: 1px solid var(--kolor-obramowanie);
 }
 .pigulka[aria-pressed='true'] { background: var(--kolor-akcent); color: var(--kolor-akcent-tekst); border-color: var(--kolor-akcent); }
-.filtr--lista { display: grid; gap: 0.25rem; font-weight: 600; }
+.filtr--lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.25rem; font-weight: 600; }
 .filtr--lista select {
   min-height: var(--cel-dotyku); padding: 0 0.75rem; font: inherit;
   border: 1px solid var(--kolor-tekst-slaby); border-radius: var(--promien); background: var(--kolor-powierzchnia);

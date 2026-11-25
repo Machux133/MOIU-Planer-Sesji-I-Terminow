@@ -1,0 +1,33 @@
+% 1. Wprowadzenie
+\section{Wprowadzenie}\label{sec:wprowadzenie}
+
+\begin{instrukcja}[zalecane]
+Krótko: czym jest aplikacja, jaki problem rozwiązuje i co zespół zrobił w ramach projektu. Wypiszcie,
+czego świadomie nie robiliście (poza zakresem) - to pokazuje, że trzymaliście się minimum z karty
+projektu. Pół strony wystarczy.
+\end{instrukcja}
+
+\subsection{Cel projektu}
+W sesji student ma kilkanaście terminów z różnych przedmiotów rozrzuconych po wiadomościach,
+kalendarzach i notatkach. Planer zbiera je w jednym miejscu, na starcie pokazuje najbliższy termin
+z liczbą dni do niego, a na liście wyróżnia terminy pilne. Dzięki temu student szybko sprawdza,
+co ma najbliżej i jaki materiał obowiązuje.
+
+\subsection{Zakres projektu}
+Zakres minimalny z karty projektu i jego realizacja:
+
+\begin{table}[H]\centering
+\caption{Realizacja zakresu minimalnego}\label{tab:zakres}
+\begin{tabularx}{\linewidth}{@{}p{0.6cm}p{5.4cm}p{2.6cm}L@{}}
+\naglowektabeli \nt{\#} & \nt{Element zakresu} & \nt{Stan} & \nt{Gdzie w aplikacji} \\
+1 & ekran startowy & \tak & Start (\texttt{/}) \\
+2 & lista elementów & \tak & Terminy (\texttt{/terminy}) \\
+3 & ekran szczegółów & \tak & Szczegóły (\texttt{/termin?id=}) i panel obok listy \\
+4 & formularz z walidacją & \czesciowo & Dodaj termin (\texttt{/dodaj}); reguły w \texttt{validate.ts}, formularz w budowie \\
+5 & nawigacja łącząca co najmniej 4 ekrany & \tak & stałe menu: Start, Terminy, Dodaj termin; okruszki \\
+6 & wersja na wąski ekran & \tak & dolny pasek nawigacji, jedna kolumna (rozdział \ref{sec:waski}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Poza zakresem} (świadomie pominięte): konta i logowanie, synchronizacja między urządzeniami, serwer, wysyłanie powiadomień (przypomnienie jest tylko zapisywane przy terminie), import z USOS.

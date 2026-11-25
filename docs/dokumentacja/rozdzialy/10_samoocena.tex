@@ -1,0 +1,28 @@
+% 10. Samoocena dziesięciu dobrych praktyk
+\section{Dziesięć dobrych praktyk - samoocena}\label{sec:samoocena}
+
+\begin{instrukcja}[wymagane]
+Dla każdej praktyki z karty projektu wpiszcie \texttt{\textbackslash tak}, \texttt{\textbackslash czesciowo}
+albo \texttt{\textbackslash nie} oraz gdzie w projekcie to widać (ekran, element, rozdział). Uczciwa
+samoocena jest częścią oceny dokumentacji - „częściowo” z dobrym wyjaśnieniem jest lepsze niż „tak”
+bez pokrycia.
+\end{instrukcja}
+
+\begin{table}[H]\centering
+\caption{Samoocena dziesięciu dobrych praktyk}\label{tab:samoocena}
+{\small
+\begin{tabularx}{\linewidth}{@{}p{0.5cm}p{4.2cm}p{2.4cm}L@{}}
+\naglowektabeli \nt{\#} & \nt{Praktyka} & \nt{Spełniona?} & \nt{Gdzie to widać} \\
+1 & Ramy Graficzne & \tak & rozdział \ref{sec:projekt}; wspólny układ i tokeny CSS, menu w tym samym miejscu na każdym ekranie \\
+2 & Hierarchia wizualna & \tak & karta najbliższego terminu na Starcie; „Dodaj termin” jedynym wypełnionym przyciskiem \\
+3 & Nawigacja i orientacja & \tak & rozdział \ref{sec:nawigacja}; aktywna pozycja menu, okruszki, „Wróć do listy” \\
+4 & Lista i szczegóły & \tak & dwa panele na szerokim ekranie, osobny ekran na wąskim (rozdział \ref{sec:waski}) \\
+5 & Formularz & \nie & formularz jeszcze w budowie (stan na 25.11) \\
+6 & Błędy w formularzu & \nie & reguły w \texttt{validate.ts} gotowe, brak komunikatów przy polach \\
+7 & Wartości domyślne i polecenia & \czesciowo & przyciski opisane czasownikami; brak jeszcze formularza i zabezpieczenia usuwania \\
+8 & Obsługa klawiaturą & \czesciowo & widoczne zaznaczenie i skip-link; pełny test zaplanowany na L7 \\
+9 & Wąski ekran & \tak & jedna kolumna, dolny pasek, cele 48\,px, brak przewijania w bok przy 390\,px \\
+10 & Czytelność i dostępność & \tak & rozdział \ref{sec:dostepnosc}; kontrast co najmniej 5,7:1, typ i pilność także tekstem \\
+\bottomrule
+\end{tabularx}}
+\end{table}

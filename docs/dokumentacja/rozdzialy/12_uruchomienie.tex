@@ -1,0 +1,30 @@
+% 12. Instrukcja uruchomienia
+\section{Instrukcja uruchomienia}\label{sec:uruchomienie}
+
+\begin{instrukcja}[wymagane]
+Krok po kroku, tak żeby prowadząca mogła uruchomić projekt na swoim komputerze: co zainstalować, jakie
+polecenia wydać, gdzie otworzyć aplikację. Sprawdźcie instrukcję na komputerze osoby, która nie
+pisała kodu.
+\end{instrukcja}
+
+\begin{ramka}{Szybki start}
+\textbf{Repozytorium:} \dkpokaz{repozytorium}\\
+\textbf{Dane testowe:} aplikacja startuje z 12 przykładowymi terminami; konto nie jest potrzebne. Żeby wrócić do danych startowych, wystarczy usunąć klucz \texttt{planer-sesji:terminy} z \texttt{localStorage}.
+\end{ramka}
+
+\subsection{Wymagania}
+\begin{itemize}
+  \item Node.js 22.23.4 lub nowszy (z npm), Git
+  \item przeglądarka: Chrome, Firefox albo Edge
+\end{itemize}
+
+\subsection{Uruchomienie lokalne}
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[style=konsola]
+git clone https://github.com/Machux133/MOIU-Planer-Sesji-I-Terminow.git
+cd MOIU-Planer-Sesji-I-Terminow
+npm install
+npm run dev
+# adres: http://localhost:4321/MOIU-Planer-Sesji-I-Terminow/
+\end{lstlisting}
+\end{minipage}

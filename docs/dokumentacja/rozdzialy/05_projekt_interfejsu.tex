@@ -1,0 +1,39 @@
+% 5. Projekt interfejsu
+\section{Projekt interfejsu}\label{sec:projekt}
+
+\begin{instrukcja}[zalecane]
+Pokażcie drogę od makiety do gotowego ekranu i opiszcie decyzje wizualne z Wykładu 2: Ramy Graficzne
+(stałe elementy na wszystkich ekranach), hierarchię wizualną (co dominuje na ekranie) i układ.
+Makiety z K1 dajcie do załącznika A, a tutaj jedno porównanie makieta - ekran końcowy.
+\end{instrukcja}
+
+\subsection{Od makiety do ekranu}
+\zrzut{makieta_lista.png}{Makieta listy z punktu kontrolnego K1}{0.8}
+\zrzut{e2_lista.png}{Ekran listy w obecnej wersji (szeroki ekran, dwa panele)}{0.8}
+Układ z makiety został zachowany: boczne menu, filtr w postaci przycisków, lista kart po lewej
+i szczegóły wybranego terminu po prawej. Szarości zastąpił jeden kolor akcentu, a znaczniki typu
+dostały ikony z zestawu Lucide obok tekstu. Przyciski „Edytuj termin” i „Usuń termin” z makiety
+zostaną dodane razem z formularzem (L7).
+
+\subsection{Ramy Graficzne i hierarchia wizualna}
+Wszystkie ekrany korzystają z jednego układu (\texttt{Layout.astro}) i jednego pliku tokenów CSS
+(\texttt{global.css}): to samo menu w tym samym miejscu, ten sam krój, kolory, promienie i odstępy.
+Na ekranie startowym dominuje karta najbliższego terminu: jest największa, ma grubszą ramkę, cień
+i liczbę dni zapisaną cyfrą wielkości 4\,rem; dodatkowo wokół ramki krąży subtelny punkt światła.
+Na liście dominuje zaznaczony termin i jego panel szczegółów, a na szczegółach blok z datą i liczbą dni.
+Polecenie główne „Dodaj termin” to jedyny wypełniony przycisk w kolorze akcentu, z ikoną.
+
+\subsection{Kolory i typografia}
+\begin{table}[H]\centering
+\caption{Kolory i kroje pisma}\label{tab:kolory}
+\begin{tabularx}{\linewidth}{@{}p{3.4cm}p{2.6cm}L@{}}
+\naglowektabeli \nt{Rola} & \nt{Wartość} & \nt{Gdzie używana} \\
+kolor główny & \#2F3FD0 & przyciski główne, aktywna pozycja menu, linki, liczba dni \\
+kolor tła & \#F6F7FB / \#FFFFFF & tło strony / karty i menu \\
+kolor tekstu & \#1B1F2A / \#4A5163 & tekst podstawowy / pomocniczy \\
+kolor błędu & \#B00020 & komunikaty o błędach w formularzu \\
+kolor pilności & \#B3261E na \#FDECEA & znacznik „Za N dni” przy terminach pilnych \\
+krój pisma & systemowy (\texttt{system-ui}, Segoe UI, Roboto) & cały interfejs; nie pobieramy fontów \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,57 @@
+% 4. Architektura informacji i nawigacja
+\section{Ekrany i nawigacja}\label{sec:nawigacja}
+
+\begin{instrukcja}[wymagane]
+Lista ekranów i mapa przejść między nimi. Nazwijcie model nawigacji z Wykładu 1 (np. oś i szprychy,
+pełne połączenie, wiele poziomów, krok po kroku; jeden serwis może łączyć dwa modele) i uzasadnijcie go w 1-2 zdaniach. Mapę możecie zmienić w kodzie
+TikZ poniżej albo zastąpić obrazkiem (\texttt{\textbackslash zrzut\{mapa\_ekranow.png\}\{...\}\{0.9\}}).
+\end{instrukcja}
+
+\subsection{Lista ekranów}
+\begin{table}[H]\centering
+\caption{Ekrany aplikacji}\label{tab:ekrany}
+\begin{tabularx}{\linewidth}{@{}p{0.6cm}p{3.6cm}Lp{3.4cm}@{}}
+\naglowektabeli \nt{\#} & \nt{Ekran} & \nt{Do czego służy} & \nt{Przejścia do} \\
+E1 & Start (\texttt{/}) & najbliższy termin z liczbą dni, polecenie „Dodaj termin”, trzy następne terminy & E2, E3, E4 \\
+E2 & Terminy (\texttt{/terminy}) & wszystkie terminy według daty, filtr po przedmiocie, wyróżnione pilne; na szerokim ekranie szczegóły w panelu obok & E3, E1, E4 \\
+E3 & Szczegóły (\texttt{/termin?id=}) & pełne dane terminu: data, liczba dni, sala, zakres, notatki, przypomnienie & E2, E4 (edycja) \\
+E4 & Dodaj / edytuj (\texttt{/dodaj}) & formularz nowego terminu albo edycji istniejącego & E2 (po zapisie) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Mapa ekranów}
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=1.2cm and 1.6cm]
+  \node[ekranglowny] (start) {E1\\Start};
+  \node[ekran, right=of start] (lista) {E2\\Terminy};
+  \node[ekran, right=of lista] (szcz) {E3\\Szczegóły};
+  \node[ekran, below=of lista] (form) {E4\\Dodaj / edytuj};
+  \draw[przejscie] (start) -- node[opis,above]{zobacz wszystkie} (lista);
+  \draw[przejscie] (lista) -- node[opis,above]{wybór terminu} (szcz);
+  \draw[przejscie] (start.north) -- ++(0,0.7) -| node[opis,pos=0.25,above]{karta najbliższego terminu} (szcz.north);
+  \draw[przejscie] (start) |- node[opis,pos=0.75,below]{Dodaj termin} (form);
+  \draw[przejscie] (szcz) |- node[opis,pos=0.75,below]{Edytuj termin} (form);
+  \draw[powrot] (form) -- node[opis,right]{zapisz} (lista);
+\end{tikzpicture}
+\caption{Mapa ekranów i przejść; z każdego ekranu stałe menu prowadzi do E1, E2 i E4 (nie rysowane)}\label{rys:mapa}
+\end{figure}
+
+\subsection{Model nawigacji}
+\textbf{Model:} wiele poziomów (płytka hierarchia, dwa poziomy) połączony ze stałą nawigacją globalną.\\
+\textbf{Uzasadnienie:} student przechodzi od ogółu (lista terminów) do szczegółu (jeden termin), więc
+naturalne są dwa poziomy. Trzy ekrany najwyższego poziomu są zawsze widoczne w menu, bo przy trzech
+pozycjach nie ma powodu chować ich w menu rozwijanym, a „Dodaj termin” jest najczęstszą akcją zmieniającą
+dane. Każdy ekran jest osiągalny w najwyżej dwóch kliknięciach.
+
+\subsection{Orientacja użytkownika}
+Aktywna pozycja menu ma wypełnione tło i atrybut \texttt{aria-current="page"}. Na ekranach poziomu 2
+i w formularzu są Okruszki (Start \textgreater{} Terminy \textgreater{} Szczegóły), a na szczegółach także link
+„Wróć do listy”. Każdy ekran ma własny adres, więc działa przycisk „Wstecz” przeglądarki, a stan listy
+(filtr i wybrany termin) jest zapisany w adresie (\texttt{?przedmiot=\&id=}) i nie ginie po odświeżeniu.
+
+\subsection{Ścieżka głównego zadania}
+Sprawdzenie najbliższego terminu: 0 kliknięć (widać go od razu na ekranie startowym). Zakres materiału
+najbliższego terminu: Start $\to$ karta najbliższego terminu (1 kliknięcie). Terminy jednego przedmiotu:
+Start $\to$ Terminy $\to$ filtr przedmiotu (2 kliknięcia). Dodanie terminu: „Dodaj termin” z menu albo ze
+Startu (1 kliknięcie do formularza).

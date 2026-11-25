@@ -1,0 +1,34 @@
+% 3. Wymagania
+\section{Wymagania}\label{sec:wymagania}
+
+\begin{instrukcja}[zalecane]
+Wymagania funkcjonalne mówią, co aplikacja robi, a niefunkcjonalne - jaka ma być. Każde wymaganie ma
+identyfikator (WF-1, WN-1), żeby można się do niego odwołać w testach (rozdział \ref{sec:testy}).
+Priorytet: \textbf{M} - musi być, \textbf{P} - powinno być, \textbf{O} - opcjonalne.
+\end{instrukcja}
+
+\subsection{Wymagania funkcjonalne}
+\begin{table}[H]\centering
+\caption{Wymagania funkcjonalne}\label{tab:wf}
+\begin{tabularx}{\linewidth}{@{}p{1.2cm}Lp{1.6cm}p{2.4cm}@{}}
+\naglowektabeli \nt{ID} & \nt{Opis} & \nt{Priorytet} & \nt{Stan} \\
+WF-1 & \wpisz{użytkownik przegląda listę ofert z podziałem na kierunki} & M & \wpisz{zrealizowane} \\
+WF-2 & \wpisz{użytkownik filtruje listę po przedmiocie} & P & \\
+WF-3 & \wpisz{użytkownik dodaje ofertę przez formularz z walidacją} & M & \\
+WF-4 & \wpisz{...} & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Wymagania niefunkcjonalne}
+\begin{table}[H]\centering
+\caption{Wymagania niefunkcjonalne}\label{tab:wn}
+\begin{tabularx}{\linewidth}{@{}p{1.2cm}Lp{4.2cm}@{}}
+\naglowektabeli \nt{ID} & \nt{Opis} & \nt{Jak sprawdzone} \\
+WN-1 & interfejs działa na ekranie o szerokości 360 px bez przewijania w bok & \wpisz{narzędzia deweloperskie, telefon} \\
+WN-2 & kontrast tekstu co najmniej 4,5:1 & \wpisz{narzędzie do kontrastu} \\
+WN-3 & wszystkie funkcje dostępne z klawiatury & \wpisz{test klawiszem Tab} \\
+WN-4 & \wpisz{...} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
