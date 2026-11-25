@@ -30,11 +30,7 @@ function read(): Termin[] {
 }
 
 function write(items: Termin[]): void {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(items));
-  } catch {
-    /* brak zapisu nie powinien wywracać interfejsu */
-  }
+  localStorage.setItem(KEY, JSON.stringify(items));
 }
 
 export function sortByDate(items: Termin[]): Termin[] {

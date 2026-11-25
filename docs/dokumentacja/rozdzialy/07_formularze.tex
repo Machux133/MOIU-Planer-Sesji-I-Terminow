@@ -1,24 +1,21 @@
 % 7. Formularze i obsługa błędów
 \section{Formularze i obsługa błędów}\label{sec:formularze}
 
-\begin{instrukcja}[wymagane]
-Zasady projektowania formularzy z Wykładu 3: etykiety przy polach, kontrolki dobrane do danych,
-tylko potrzebne pytania, sensowne wartości domyślne, Zlokalizowane Komunikaty O Błędach (które pole,
-dlaczego, jak poprawić), wpisane dane nie znikają po błędzie.
-\end{instrukcja}
+\subsection{Dodawanie terminu}
+Student wybiera przedmiot i jeden z trzech typów zaliczenia: kolokwium,
+egzamin lub projekt. Następnie podaje datę i godzinę. Może też wpisać
+salę, zakres materiału i notatki. Domyślne przypomnienie to jeden dzień
+przed zaliczeniem. Student może zmienić to ustawienie lub wybrać brak przypomnienia.
 
-\begin{table}[H]\centering
-\caption{Pola formularza, walidacja i komunikaty}\label{tab:formularz}
-{\small
-\begin{tabularx}{\linewidth}{@{}p{2.6cm}p{2.8cm}p{3.6cm}L@{}}
-\naglowektabeli \nt{Pole} & \nt{Kontrolka} & \nt{Reguła walidacji} & \nt{Komunikat o błędzie} \\
-\wpisz{tytuł} & \wpisz{pole tekstowe} & \wpisz{wymagane, 3-120 znaków} & \wpisz{„Wpisz tytuł książki (co najmniej 3 znaki).”} \\
-\wpisz{cena} & \wpisz{pole liczbowe} & \wpisz{0-500 zł} & \wpisz{...} \\
-\wpisz{stan} & \wpisz{przełączniki (radio)} & \wpisz{domyślnie „dobry”} & \wpisz{-} \\
-\wpisz{...} & & & \\
-\bottomrule
-\end{tabularx}}
-\end{table}
+\paragraph{Walidacja.}
+Jeśli student wybierze przedmiot Bazy danych, kolokwium i godzinę 10:15,
+ale pominie datę, po próbie zapisu pod polem daty pojawi się komunikat
+,,Wybierz datę zaliczenia''. Kursor przechodzi do pierwszego błędnego
+pola, a wpisane wartości pozostają w formularzu. Data wcześniejsza
+niż dzisiejsza również wymaga poprawy.
 
-\zrzut{formularz_blad.png}{Formularz z komunikatem o błędzie przy polu}{0.7}
-\wpisz{Jak zabezpieczyliście czynności nieodwracalne (cofnięcie albo potwierdzenie).}
+\paragraph{Zapis.}
+Przycisk ,,Zapisz termin'' zapisuje dane w pamięci przeglądarki
+(\texttt{localStorage}). Po zapisie student widzi listę terminów
+i komunikat ,,Termin zapisany''. W razie błędu zapisu formularz
+zachowuje dane i informuje o problemie.

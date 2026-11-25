@@ -1,7 +1,11 @@
 ---
+import seed from '../data/terminy.json';
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { url } from '../lib/url';
+
+const przedmioty = [...new Set(seed.map(termin => termin.przedmiot))]
+  .sort((a, b) => a.localeCompare(b, 'pl'));
 ---
 <Layout tytul="Dodaj termin">
   <Breadcrumbs sciezka={[
@@ -10,10 +14,76 @@ import { url } from '../lib/url';
     { etykieta: 'Dodaj termin' },
   ]} />
   <h1>Dodaj termin</h1>
-  <form id="formularz" novalidate>
-    <!-- TODO (L6): pola z etykietami: przedmiot, typ, data, godzina, sala, zakres, przypomnienie;
-         walidacja z validate.ts; komunikaty przy polach (aria-describedby); tryb edycji przez ?id= -->
-    <p>Formularz w budowie.</p>
-    <button class="przycisk przycisk--glowny" type="submit">Dodaj termin</button>
+  <form id="formularz" class="karta" novalidate>
+    <p>* Pole wymagane</p>
+    <label for="przedmiot">Przedmiot *</label>
+    <select id="przedmiot" name="przedmiot" required aria-describedby="blad-przedmiot">
+      <option value="">Wybierz przedmiot</option>
+      {przedmioty.map(przedmiot => <option>{przedmiot}</option>)}
+    </select>
+    <small id="blad-przedmiot"></small>
+    <fieldset><legend>Typ zaliczenia *</legend>
+      {['Kolokwium','Egzamin','Projekt'].map(typ => <label><input type="radio" name="typ" value={typ.toLowerCase()} required aria-describedby="blad-typ" /> {typ}</label>)}
+      <small id="blad-typ"></small>
+    </fieldset>
+    <label for="data">Data *</label><input id="data" name="data" type="date" required aria-describedby="blad-data" />
+    <small id="blad-data"></small>
+    <label for="godzina">Godzina *</label><input id="godzina" name="godzina" type="time" required aria-describedby="blad-godzina" />
+    <small id="blad-godzina"></small>
+    <label for="przypomnienie">Przypomnienie</label>
+    <select id="przypomnienie" name="przypomnienie">
+      <option value="1d">1 dzień przed</option><option value="3d">3 dni przed</option><option value="7d">7 dni przed</option><option value="none">Brak</option>
+    </select>
+    <label for="sala">Sala (opcjonalnie)</label><input id="sala" name="sala" />
+    <label for="zakres">Zakres materiału (opcjonalnie)</label><textarea id="zakres" name="zakres"></textarea>
+    <label for="notatki">Notatki (opcjonalnie)</label><textarea id="notatki" name="notatki"></textarea>
+    <p id="problem-zapisu" role="alert"></p>
+    <div><button class="przycisk przycisk--glowny" type="submit">Zapisz termin</button> <a href={url('/terminy')}>Anuluj</a></div>
   </form>
 </Layout>
+<style>
+  form { display: grid; gap: .4rem; max-width: 36rem; }
+  form > label, legend { font-weight: 600; margin-top: .6rem; }
+  select, textarea, input:not([type=radio]) {
+    padding: .6rem .75rem;
+    min-width: 0;
+    min-height: var(--cel-dotyku);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--promien);
+    background: var(--kolor-powierzchnia);
+    color: var(--kolor-tekst);
+    font: inherit;
+  }
+  textarea { resize: vertical; }
+  form [aria-invalid="true"]:not([type=radio]) { border-color: var(--kolor-blad); }
+  fieldset { min-width: 0; margin: .6rem 0 0; border: 1px solid var(--kolor-obramowanie); border-radius: var(--promien); }
+  fieldset label { display: inline-flex; align-items: center; gap: .3rem; min-height: var(--cel-dotyku); padding: .4rem; }
+  small { display: block; color: var(--kolor-blad); }
+  small:empty, #problem-zapisu:empty { display: none; }
+</style>
+<script>
+  import { save, type Termin } from '../lib/store';
+  import { validateTermin } from '../lib/validate';
+  import { url } from '../lib/url';
+
+  const form = document.querySelector<HTMLFormElement>('#formularz')!;
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const values = Object.fromEntries(new FormData(form)) as unknown as Omit<Termin, 'id'>;
+    const errors = validateTermin(values);
+    let first: HTMLElement | undefined;
+    for (const control of form.querySelectorAll<HTMLInputElement>('[aria-describedby]')) {
+      const error = errors[control.name as keyof Termin];
+      document.getElementById(control.getAttribute('aria-describedby')!)!.textContent = error ?? '';
+      control.setAttribute('aria-invalid', String(Boolean(error)));
+      if (error) first ??= control;
+    }
+    if (first) { first.focus(); return; }
+    try {
+      const saved = save(values);
+      location.assign(url('/terminy') + '?zapisano=1&id=' + encodeURIComponent(saved.id));
+    } catch {
+      document.getElementById('problem-zapisu')!.textContent = 'Nie udało się zapisać terminu. Sprawdź dostęp do pamięci przeglądarki i spróbuj ponownie.';
+    }
+  });
+</script>

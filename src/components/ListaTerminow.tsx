@@ -36,6 +36,7 @@ export default function ListaTerminow() {
 
   return (
     <>
+      {start.get('zapisano') === '1' && wszystkie.some(t => t.id === start.get('id')) && <p role="status" className="karta">Termin zapisany.</p>}
       <div className="filtr filtr--pigulki" role="group" aria-label="Filtr przedmiotu">
         {['', ...przedmioty].map((p) => (
           <button key={p} type="button" className="pigulka" aria-pressed={filtr === p} onClick={() => zmienFiltr(p)}>

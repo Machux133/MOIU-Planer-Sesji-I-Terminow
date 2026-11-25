@@ -6,7 +6,7 @@ Osobne opracowania: **nawigacja-i-makiety.html** (nawigacja i makiety) oraz **wz
 
 Skład zespołu: Bartosz Kurbiel (177909), Mateusz Machowski (179734). Dane wpisano do dokumentacji i PDF-u. Grupa laboratoryjna: 2 (LB2). Dane zespołu są kompletne.
 
-Instrukcja Teams wymaga również uzupełnienia szablonu dokumentacji. Szablonu nie ma w repozytorium; ten punkt pozostaje do wykonania po udostępnieniu właściwego pliku. HTML jest wersją edytowalną K1, nie szablonem prowadzącej.
+Dokumentację z etapu L6 przygotowano w szablonie prowadzącej. [Projekt do Overleaf](../dokumentacja-overleaf.zip).
 
 Druk z Edge/Chrome: A4, skala 100%, nagłówki i stopki przeglądarki wyłączone, grafika tła włączona. Marginesy określa CSS. Sprawdź, że wynik nadal ma dwie strony.
 
@@ -21,4 +21,4 @@ Jedna osoba przesyła PDF do zadania Teams „Projekt - K1: koncepcja i makiety�
 - Makiety w dokumencie wspólnym dostosowano do druku: szarości, skala i ukrycie numerowanych adnotacji.
 - Formularz i operacje opisano jako planowane; kod aplikacji pozostaje bez zmian.
 
-Oddanie w Teams pozostaje do wykonania przez zespół.
+Zespół oddał K1 w Teams.

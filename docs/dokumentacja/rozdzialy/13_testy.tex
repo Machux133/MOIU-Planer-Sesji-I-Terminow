@@ -1,27 +1,6 @@
-% 13. Testy
-\section{Testy i znane ograniczenia}\label{sec:testy}
-
-\begin{instrukcja}[zalecane]
-Jak sprawdziliście, że aplikacja działa: scenariusze testowe powiązane z wymaganiami (rozdział
-\ref{sec:wymagania}), urządzenia i przeglądarki. Uczciwie wypiszcie znane błędy i ograniczenia.
-\end{instrukcja}
-
-\begin{table}[H]\centering
-\caption{Scenariusze testowe}\label{tab:testy}
-{\small
-\begin{tabularx}{\linewidth}{@{}p{1.1cm}p{1.4cm}LLp{1.6cm}@{}}
-\naglowektabeli \nt{ID} & \nt{Wymag.} & \nt{Kroki} & \nt{Oczekiwany wynik} & \nt{Wynik} \\
-T-1 & WF-3 & \wpisz{otwórz formularz, zostaw puste pole tytułu, zapisz} & \wpisz{komunikat przy polu, pozostałe dane zostają} & \wpisz{\tak} \\
-T-2 & WN-1 & \wpisz{zwęź okno do 360 px} & \wpisz{brak przewijania w bok} & \\
-T-3 & \wpisz{...} & & & \\
-\bottomrule
-\end{tabularx}}
-\end{table}
-
-\textbf{Testowane na:} \wpisz{urządzenia, systemy, przeglądarki.}
-
-\subsection{Znane błędy i ograniczenia}
-\begin{itemize}
-  \item \wpisz{np. brak trybu offline}
-  \item \wpisz{...}
-\end{itemize}
+\section{Test dodawania terminu}\label{sec:testy}
+W przeglądarce Edge wybraliśmy Bazy danych, kolokwium i godzinę 10:15.
+Po próbie zapisu bez daty formularz wskazał pole daty. Godzina i wcześniejsze wybory pozostały w formularzu.
+Następnie wpisaliśmy datę z przeszłości i sprawdziliśmy komunikat o konieczności wybrania dzisiejszej lub późniejszej daty.
+Po wpisaniu przyszłej daty aplikacja otworzyła listę z potwierdzeniem zapisu.
+Nowy rekord w pamięci przeglądarki miał ustawione przypomnienie dzień przed zaliczeniem.

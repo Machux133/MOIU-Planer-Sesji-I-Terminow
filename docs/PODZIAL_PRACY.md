@@ -23,10 +23,11 @@ Terminy według harmonogramu prowadzącej (K1 17.11, L5 18.11, L6 25.11, K2 02.1
 | Termin | Zadanie | Pliki / materiały | Status |
 |---|---|---|---|
 | do 17.11 (K1) | Lista min. 6 wzorców (gdzie i dlaczego), makieta formularza | `docs/k1/wzorce-i-formularz.html`; wspólne `docs/k1/K1-zespol-8.html` i `docs/k1/K1-zespol-8.pdf` | Gotowe |
-| 18.11 (L5) | Repozytorium: konwencje gałęzi i PR-ów, pierwszy commit i push, sprawdzenie, że oboje uruchamiacie projekt | repo, `README.md` | Do zrobienia |
-| 25.11 (L6) | Formularz: pola z etykietami (przedmiot jako lista wyboru, typ jako przyciski wyboru, natywne `date` i `time`, przypomnienie z domyślną wartością „1 dzień przed”), tylko potrzebne pola | `dodaj.astro` | Do zrobienia |
-| 25.11 (L6) | Walidacja: reguły w `validate.ts` (np. data nie z przeszłości), komunikaty przy polach przez `aria-describedby`, wpisane dane nie znikają po błędzie, fokus na pierwszym błędnym polu | `validate.ts`, `dodaj.astro` | Do zrobienia |
-| 25.11 (L6) | Zapis przez `save()` i przekierowanie do listy z komunikatem potwierdzającym | `dodaj.astro` | Do zrobienia |
+| 18.11 (L5) | Repozytorium na GitHubie, pierwszy commit i push | repo | Gotowe |
+| 18.11 (L5) | Uzgodnić zasady pracy z gałęziami i PR-ami oraz potwierdzić uruchomienie projektu u obu osób | repo, `README.md` | Do potwierdzenia |
+| 25.11 (L6) | Formularz: pola z etykietami (przedmiot jako lista wyboru, typ jako przyciski wyboru, natywne `date` i `time`, przypomnienie z domyślną wartością „1 dzień przed”), tylko potrzebne pola | `dodaj.astro` | Gotowe |
+| 25.11 (L6) | Walidacja: reguły w `validate.ts` (np. data nie z przeszłości), komunikaty przy polach przez `aria-describedby`, wpisane dane nie znikają po błędzie, fokus na pierwszym błędnym polu | `validate.ts`, `dodaj.astro` | Gotowe |
+| 25.11 (L6) | Zapis przez `save()` i przekierowanie do listy z komunikatem potwierdzającym | `dodaj.astro` | Gotowe |
 | 02.12 (L7) | Tryb edycji (`?id=` w formularzu) i przyciski „Edytuj termin” oraz „Usuń termin” na szczegółach | `dodaj.astro`, `termin.astro` | Do zrobienia |
 | 02.12 (L7) | Usuwanie z możliwością „Cofnij” (`remove()` zwraca usunięty termin) albo z potwierdzeniem | `termin.astro`, `store.ts` | Do zrobienia |
 | 02.12 (L7) | Obsługa klawiaturą całego przepływu (kolejność Tab, Enter w formularzu, widoczny fokus) | wszystkie strony | Do zrobienia |
@@ -35,7 +36,7 @@ Terminy według harmonogramu prowadzącej (K1 17.11, L5 18.11, L6 25.11, K2 02.1
 ## Wspólne
 
 - [x] **K1 — opracowanie:** opracowania tematyczne oraz wspólny PDF są przygotowane w `docs/k1/`.
-- [ ] **K1 — oddanie (do 17.11):** uzupełnić szablon dokumentacji; jedna osoba przesyła go do Teams.
+- [x] **K1 — oddanie:** zespół oddał wspólny dokument w Teams.
 - [ ] **Wzajemne przeglądy:** każdy PR sprawdza druga osoba i prosi autora o wyjaśnienie, co zmienił (pytania o kod dostaje każdy osobno).
 - [ ] **Przed K2 (30.11–01.12):** wspólne przejście przepływu start → lista → szczegóły → dodaj → edytuj → usuń i próba pokazu na 5 minut.
 - [ ] **Dokumentacja (L9, 16.12):** rozdziały o nawigacji, układzie, wąskim ekranie, formularzach i ich dostępności; samoocena 10 praktyk, rozdział 12 (uruchomienie), źródła ikon i fontów.
